@@ -11,7 +11,7 @@ sudo systemctl status docker || systemctl start docker
 docker container inspect jrvs-psql
 container_status=$?
 
-#User switch case to handle create|stop|start opetions
+#User switch case to handle create|stop|start operations
 case $cmd in
   create)
 
@@ -21,7 +21,7 @@ case $cmd in
 		exit 1
 	fi
 
-  #check # of CLI arguments
+  #check # of inputted CLI arguments
   if [ $# -ne 3 ]; then
     echo 'Create requires username and password'
     exit 1
