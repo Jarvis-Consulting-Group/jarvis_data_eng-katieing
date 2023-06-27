@@ -31,7 +31,8 @@ case $cmd in
 	docker volume create pgdata
   #Start the container
   export PGPASSWORD=$db_password
-	docker run --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -u $db_username -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres:9.6-alpine
+  export PG_USER=$db_username
+	docker run --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -e POSTGRES_USER=${PG_USER} -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres:9.6-alpine
 
 	exit $?
 	;;
