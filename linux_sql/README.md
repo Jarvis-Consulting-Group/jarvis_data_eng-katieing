@@ -20,16 +20,20 @@ The project utilizes Bash scripts for docker container creation and pulling data
 3. Create the host_agent database.
 
 ```psql -h localhost -p 5432 -U postgres -c "CREATE DATABASE host_agent;"```
+
 4. Create the host_info and host_usage tables.
 
 ```psql -h localhost -U postgres -d host_agent -f sql/ddl.sql ```
-4. Insert hardware specs data into the DB using host_info.sh
+
+5. Insert hardware specs data into the DB using host_info.sh
 
 ```./host_info.sh localhost 5432 host_agent postgres password ```
-5. Insert hardware usage data into the DB using host_usage.sh
+
+6. Insert hardware usage data into the DB using host_usage.sh
 
 ```./host_info.sh localhost 5432 host_agent postgres password```
-6. Crontab setup
+
+7. Crontab setup
 ```
 #Enter editor for crontab jobs
 crontab -e
