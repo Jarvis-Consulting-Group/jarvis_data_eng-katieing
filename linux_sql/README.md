@@ -45,7 +45,7 @@ crontab -e
 
 # Implemenation
 ## Architecture
-Draw a cluster diagram with three Linux hosts, a DB, and agents (use draw.io website). Image must be saved to the `assets` directory.
+![diagram](./assets/diagram)
 
 ## Scripts
 - psql_docker.sh
