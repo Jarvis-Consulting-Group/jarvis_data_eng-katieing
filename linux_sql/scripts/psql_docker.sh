@@ -30,9 +30,8 @@ case $cmd in
   #Create container
 	docker volume create pgdata
   #Start the container
-  #Unsure if I should use inputted password or default from original script?
-  export PGPASSWORD='password'
-	docker run --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres:9.6-alpine
+  export PGPASSWORD=$db_password
+	docker run --name jrvs-psql -e POSTGRES_PASSWORD=$PGPASSWORD -u $db_username -d -v pgdata:/var/lib/postgresql/data -p 5432:5432 postgres:9.6-alpine
 
 	exit $?
 	;;

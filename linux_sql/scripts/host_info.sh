@@ -13,7 +13,7 @@ if [ "$#" -ne 5 ]; then
   exit 1
 fi
 
-#save needed variables
+#save lscpu and hostname to variables
 lscpu_out=$(lscpu)
 hostname=$(hostname -f)
 
@@ -27,8 +27,6 @@ total_mem=$(cat /proc/meminfo | grep -E "MemTotal:" | awk '{print $2}' | xargs)
 
 #retrieve current time
 timestamp=$(date "+%F %T")
-
-#possible check if already exists in table. psql returns the error itself, prob not necessary
 
 #psql command: inserts hardware data into host_info table
 insert_stmt="INSERT INTO host_info(hostname, cpu_number, cpu_architecture, cpu_model, cpu_mhz, l2_cache, timestamp, total_mem) \

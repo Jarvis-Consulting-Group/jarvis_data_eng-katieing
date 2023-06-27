@@ -119,3 +119,4 @@ All source code is managed on GitHub
 
 # Improvements
 1. Integrate docker start into crontab to start psql container if it is not running.
+2. Add easy to read error messages for anticipated errors. (For example, running host_info.sh more than once)
