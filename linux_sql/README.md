@@ -45,7 +45,7 @@ crontab -e
 
 # Implemenation
 ## Architecture
-![diagram](./assets/diagram)
+![Architecture diagram](./assets/diagram)
 
 ## Scripts
 - psql_docker.sh
