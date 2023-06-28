@@ -22,9 +22,8 @@
   "github_repo_root_url": "https://github.com/jarviscanada/jarvis_data_eng-katieing",
   "highlighted_projects": [
     {
-      "description": "Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.",
-      "git_url": "https://github.com/jarviscanada/jarvis_profile_builder",
-      "name": "Web app for resturant"
+      "description": "Collected and analyzed qualitative survey response data from calculus students, prepared a report for the Diversity \u0026 Equity committee",
+      "name": "Survey on Classroom Experiences for Underrepresented Groups in Math"
     }
   ],
   "jarvis_projects": [
@@ -38,8 +37,21 @@
   "others": [
     {
       "bullets": [
-        "Running - currently training for a marathon",
-        "Sewing"
+        "Udacity Machine Learning (2019)"
+      ],
+      "title": "Certificates"
+    },
+    {
+      "bullets": [
+        "Winner"
+      ],
+      "title": "Awards"
+    },
+    {
+      "bullets": [
+        "Basketball player; joined xyz club",
+        "Competitive gaming; compete for xyz",
+        "Volunteer, ABC Food bank: Ut enim ad minim veniam"
       ],
       "title": "Activities/Hobbies"
     }
@@ -47,7 +59,7 @@
   "professional_experience": [
     {
       "company": "Jarvis",
-      "description": "Developed a monitoring agent with SQL, (more to add)",
+      "description": "Developed a monitoring agent with SQL, Used Agile methodology to collaborate with team",
       "duration": "2023-present",
       "title": "Technical Consultant"
     }

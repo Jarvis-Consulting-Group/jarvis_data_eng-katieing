@@ -50,11 +50,9 @@ jarvis_projects:
 # Please focus on transferable skills, such as soft skills and data related skills
 highlighted_projects:
     #project name
-  - name: "Web app for resturant"
-    #URL is optional
-    git_url: "https://github.com/jarviscanada/jarvis_profile_builder"
+  - name: "Survey on Classroom Experiences for Underrepresented Groups in Math"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.
+    description: "Collected and analyzed qualitative survey response data from calculus students, prepared a report for the Diversity & Equity committee"
   #- name: "Machine Learning"
   #  git_url:
   #  description: Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.
@@ -68,7 +66,7 @@ professional_experience:
     duration: "2023-present"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
     # Avoid the following terms: training, learning, etc. Instead, you should focus on the work, such as worked on XYY; Wrote ABC document; Analyzed QWE project;
-    description: Developed a monitoring agent with SQL, (more to add)
+    description: "Developed a monitoring agent with SQL, Used Agile methodology to collaborate with team"
   #- title: "Research Assistant"
   #  company: "XYZ Company"
   #  duration: "2019"
@@ -92,8 +90,16 @@ education:
 
 #Optional section
 others:
-    #category
+  #category
+  - title: "Certificates"
+    #list of items
+    bullets:
+      - "Udacity Machine Learning (2019)"
+  - title: "Awards"
+    bullets:
+      - "Winner"
   - title: "Activities/Hobbies"
     bullets:
-      - Running - currently training for a marathon
-      - Sewing
+      - "Basketball player; joined xyz club"
+      - "Competitive gaming; compete for xyz"
+      - "Volunteer, ABC Food bank: Ut enim ad minim veniam"

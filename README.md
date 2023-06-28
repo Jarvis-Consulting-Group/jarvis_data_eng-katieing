@@ -17,12 +17,12 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng-katieing](
 
 
 ## Highlighted Projects
-**Web app for resturant** [[GitHub](https://github.com/jarviscanada/jarvis_profile_builder)]: Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.
+**Survey on Classroom Experiences for Underrepresented Groups in Math**: Collected and analyzed qualitative survey response data from calculus students, prepared a report for the Diversity & Equity committee
 
 
 ## Professional Experiences
 
-**Technical Consultant, Jarvis (2023-present)**: Developed a monitoring agent with SQL, (more to add)
+**Technical Consultant, Jarvis (2023-present)**: Developed a monitoring agent with SQL, Used Agile methodology to collaborate with team
 
 
 ## Education
@@ -34,5 +34,8 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng-katieing](
 
 
 ## Miscellaneous
-- Running - currently training for a marathon
-- Sewing
+- Udacity Machine Learning (2019)
+- Winner
+- Basketball player; joined xyz club
+- Competitive gaming; compete for xyz
+- Volunteer, ABC Food bank: Ut enim ad minim veniam
