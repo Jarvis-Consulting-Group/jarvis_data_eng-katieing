@@ -66,7 +66,7 @@ professional_experience:
     duration: "2023-present"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
     # Avoid the following terms: training, learning, etc. Instead, you should focus on the work, such as worked on XYY; Wrote ABC document; Analyzed QWE project;
-    description: "Developed a monitoring agent with SQL, Used Agile methodology to collaborate with team"
+    description: "Developed a monitoring agent with SQL, Used Agile methodology to collaborate with the team"
   #- title: "Research Assistant"
   #  company: "XYZ Company"
   #  duration: "2019"
@@ -91,15 +91,7 @@ education:
 #Optional section
 others:
   #category
-  - title: "Certificates"
-    #list of items
-    bullets:
-      - "Udacity Machine Learning (2019)"
-  - title: "Awards"
-    bullets:
-      - "Winner"
   - title: "Activities/Hobbies"
     bullets:
-      - "Basketball player; joined xyz club"
-      - "Competitive gaming; compete for xyz"
-      - "Volunteer, ABC Food bank: Ut enim ad minim veniam"
+      - "Running; training for marathon"
+      - "Sewing"

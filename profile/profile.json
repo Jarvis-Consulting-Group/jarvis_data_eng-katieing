@@ -37,21 +37,8 @@
   "others": [
     {
       "bullets": [
-        "Udacity Machine Learning (2019)"
-      ],
-      "title": "Certificates"
-    },
-    {
-      "bullets": [
-        "Winner"
-      ],
-      "title": "Awards"
-    },
-    {
-      "bullets": [
-        "Basketball player; joined xyz club",
-        "Competitive gaming; compete for xyz",
-        "Volunteer, ABC Food bank: Ut enim ad minim veniam"
+        "Running; training for marathon",
+        "Sewing"
       ],
       "title": "Activities/Hobbies"
     }
@@ -59,7 +46,7 @@
   "professional_experience": [
     {
       "company": "Jarvis",
-      "description": "Developed a monitoring agent with SQL, Used Agile methodology to collaborate with team",
+      "description": "Developed a monitoring agent with SQL, Used Agile methodology to collaborate with the team",
       "duration": "2023-present",
       "title": "Technical Consultant"
     }

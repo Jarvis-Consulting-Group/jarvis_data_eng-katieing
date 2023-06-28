@@ -22,7 +22,7 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng-katieing](
 
 ## Professional Experiences
 
-**Technical Consultant, Jarvis (2023-present)**: Developed a monitoring agent with SQL, Used Agile methodology to collaborate with team
+**Technical Consultant, Jarvis (2023-present)**: Developed a monitoring agent with SQL, Used Agile methodology to collaborate with the team
 
 
 ## Education
@@ -34,8 +34,5 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng-katieing](
 
 
 ## Miscellaneous
-- Udacity Machine Learning (2019)
-- Winner
-- Basketball player; joined xyz club
-- Competitive gaming; compete for xyz
-- Volunteer, ABC Food bank: Ut enim ad minim veniam
+- Running; training for marathon
+- Sewing
