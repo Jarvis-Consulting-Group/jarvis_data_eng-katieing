@@ -24,9 +24,9 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng-katieing](
 
 **Technical Consultant, Jarvis (2023-present)**: Collaborated with a team of BSAs and developers using Agile methodology; Created a monitoring agent with SQL to be used for resource planning and allocation; Prepared a BRD for the Linux Cluster Monitoring Agent project; Conducted elicitation requirements meetings in order to create a SRD for a trading app; Provided regular documentation and verbal updates on all projects
 
-**Research Assistant, University of Toronto (2020-2021)**: Gathered and analyzed qualitative and quantitative data from three projects in the field of post-secondary education and teaching. These projects investigated retention of knowledge and communication development of past students; Served as team lead during the research process (data analysis in Excel and Google Sheets); Authored an ethics application, proposal, surveys, and written report; Presented study results at the Canadian Undergraduate Mathematics Conference in 2019 and the Fields Institute MathEd Forum in 2020.
+**Research Assistant, University of Toronto (2020-2021)**: Gathered and analyzed qualitative and quantitative data from three projects in the field of post-secondary education and teaching; Investigated retention of knowledge and communication development of past students; Served as team lead during the research process (data analysis in Excel and Google Sheets); Authored an ethics application, proposal, surveys, and written report; Presented study results at the Canadian Undergraduate Mathematics Conference in 2019 and the Fields Institute MathEd Forum in 2020.
 
-**Teaching Assistant, University of Toronto (2019-2022)**: Facilitated tutorials for students and supported professors with lectures; Independently designed a weekly series of videos and readings for a course with 3000 students as a pre-lecture learning assignment.
+**Teaching Assistant, University of Toronto (2019-2022)**: Facilitated tutorials for students and supported professors with lectures; Independently designed a weekly series of pre-lecture videos, readings and quizzes for a course with 3000 students.
 
 
 ## Education
