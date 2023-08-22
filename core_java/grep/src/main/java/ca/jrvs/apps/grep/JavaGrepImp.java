@@ -94,9 +94,7 @@ public class JavaGrepImp implements JavaGrep {
 
     @Override
     public List<File> listFiles(String rootDir) {
-        //File dir = new File(rootDir);
-        //return Arrays.asList(dir.listFiles());
-
+        //add exception for if dir does not exist?
         List<File> files = new ArrayList<>();
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(rootDir));) {
             for (Path path : directoryStream) {
@@ -115,22 +113,18 @@ public class JavaGrepImp implements JavaGrep {
 
     @Override
     public List<String> readLines(File inputFile) {
-        if (inputFile.isDirectory()) {
-            return null;
-        }
-        try (BufferedReader text = new BufferedReader(new FileReader(inputFile))) {
-            Stream<String> stream = text.lines();
-            Object[] objects = stream.toArray();
-            List<String> lines = new ArrayList<>();
-            for (Object object : objects) {
-                lines.add(object.toString());
+        List<String> lines = new ArrayList<>();
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile))) {
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                lines.add(line);
+                line = bufferedReader.readLine();
             }
-            return lines;
         } catch (FileNotFoundException e) {
-            logger.error("File " + inputFile + " not found:", e);
+            logger.error("Error: " + inputFile + " is directory", e);
         } catch (IOException e) {
             logger.error("Error: ", e);
-        } return null;
+        } return lines;
     }
 
     @Override
@@ -142,6 +136,15 @@ public class JavaGrepImp implements JavaGrep {
 
     @Override
     public void writeToFile(List<String> lines) throws IOException {
+
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(Files.newOutputStream(Paths.get(outFile))))) {
+            for (String line : lines) {
+                bufferedWriter.write(line);
+                bufferedWriter.newLine();
+            }
+        } catch (IOException e) {
+            logger.error("Error writing to file ", e);
+        }
 
     }
 
