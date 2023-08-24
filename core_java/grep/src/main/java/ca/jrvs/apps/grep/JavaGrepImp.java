@@ -90,6 +90,7 @@ public class JavaGrepImp implements JavaGrep {
         //Write matched lines to file
         writeToFile(matchedLines);
 
+
     }
 
     @Override
@@ -99,15 +100,15 @@ public class JavaGrepImp implements JavaGrep {
         try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(rootDir));) {
             for (Path path : directoryStream) {
                 File file = path.toFile();
-                if (file.isDirectory()) {
-                    List<File> subfiles = listFiles(path.toString());
-                    files.addAll(subfiles);
-                } else {
-                    files.add(path.toFile());
-                }
+//                if (file.isDirectory()) {
+//                    List<File> subFiles = listFiles(path.toString());
+//                    files.addAll(subFiles);
+//                } else {
+                    files.add(file);
+                //}
             }
         } catch (IOException e) {
-            logger.error("Error ", e);
+            logger.error("Error listing files in directory ", e);
         } return files;
     }
 
@@ -123,7 +124,7 @@ public class JavaGrepImp implements JavaGrep {
         } catch (FileNotFoundException e) {
             logger.error("Error: " + inputFile + " is directory", e);
         } catch (IOException e) {
-            logger.error("Error: ", e);
+            logger.error("Error reading lines in " + inputFile, e);
         } return lines;
     }
 
@@ -143,7 +144,7 @@ public class JavaGrepImp implements JavaGrep {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            logger.error("Error writing to file ", e);
+            throw e;
         }
 
     }
