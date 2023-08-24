@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.function.IntFunction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class JavaGrepImp implements JavaGrep {
@@ -95,21 +96,31 @@ public class JavaGrepImp implements JavaGrep {
 
     @Override
     public List<File> listFiles(String rootDir) {
+
+        //option 1: files.list
+        try (Stream<Path> stream = Files.list(Paths.get(rootDir))) {
+            List<Path> test = stream.filter(path -> path.toFile().isFile()).collect(Collectors.toList());
+            List<Path> test2 = test;
+        } catch (IOException e) {
+            logger.error("Error IO Exception", e);
+        }
+
+
+        //for each file in stream, if dir enter dir to find files
+        //if file add to stream
+
         //add exception for if dir does not exist?
         List<File> files = new ArrayList<>();
-        try (DirectoryStream<Path> directoryStream = Files.newDirectoryStream(Paths.get(rootDir));) {
-            for (Path path : directoryStream) {
-                File file = path.toFile();
-//                if (file.isDirectory()) {
-//                    List<File> subFiles = listFiles(path.toString());
-//                    files.addAll(subFiles);
-//                } else {
-                    files.add(file);
-                //}
+        File[] openedDirectory = new File(rootDir).listFiles();
+        for (File file : openedDirectory) {
+            if (file.isDirectory()) {
+                List<File> subFiles = listFiles(file.toString());
+                files.addAll(subFiles);
+            } else {
+                files.add(file);
             }
-        } catch (IOException e) {
-            logger.error("Error listing files in directory ", e);
-        } return files;
+        }
+            return files;
     }
 
     @Override
