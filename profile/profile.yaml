@@ -38,11 +38,18 @@ jarvis_projects:
     # Focus on BSA work instead of development work
     # Include the following keywords: BRD, SRD, Elicitation, stakeholder, reqruiement, analysis, RDBMS, SQL, data modeling, SLA
     description: Developed a monitoring agent that collects and records hardware and memory usage data, to provide valuable insights to business owners and team leads for future planning. This tool empowers stakeholders to make informed decisions regarding resource allocation and optimization. The data is stored and queried on a PostgreSQL database for scalable management. This project is meticulously documented to ensure straightforward setup for current and future clients.
-  #- name: "Python Data Analytics"
-  #  git_url: "/python_data_anlytics"
-    # Focus on BSA work instead of development work
-    # e.g. solve business problem, requirement, data sources, analytics, stakeholders, documentation
-  #  description: ""
+  - name: "SQL Project"
+    git_url: "/sql"
+    description: Established a comprehensive database for a newly established country club using PostgreSQL. The goal of the database is to be utilized by country club managers to analyze facility usage and demand. Demonstrated usage by executing sample queries and verifying accuracy with test data.
+  - name: "BSA Crash Course"
+    git_url: "/"
+    description: Authored a comprehensive Business Requirements Document (BRD) for a Linux Cluster Monitoring Agent project, meticulously detailing the project scope, business requirements, timeline, and cost-benefit analysis. Orchestrated an elicitation meeting with stakeholders and crafted a concise System Requirements Document (SRD) for a Retail Stock Trading Application. Effectively translated business needs into technical specifications by creating architecture and ER diagrams, and communicating thorough use cases and data requirements.
+  - name: "JDBC App"
+    git_url: "/core_java/jdbc"
+    description: Developed a JDBC app to connect to a PSQL database and allow the user to perform CRUD operations to the database from Java.
+
+
+
   #- name: "Hadoop"
   #  git_url: "/hadoop"
   #  description: ""

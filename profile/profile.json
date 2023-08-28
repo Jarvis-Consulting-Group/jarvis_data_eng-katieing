@@ -31,6 +31,21 @@
       "description": "Developed a monitoring agent that collects and records hardware and memory usage data, to provide valuable insights to business owners and team leads for future planning. This tool empowers stakeholders to make informed decisions regarding resource allocation and optimization. The data is stored and queried on a PostgreSQL database for scalable management. This project is meticulously documented to ensure straightforward setup for current and future clients.",
       "git_url": "/linux_sql",
       "name": "Linux Cluster Resource Monitoring App"
+    },
+    {
+      "description": "Established a comprehensive database for a newly established country club using PostgreSQL. The goal of the database is to be utilized by country club managers to analyze facility usage and demand. Demonstrated usage by executing sample queries and verifying accuracy with test data.",
+      "git_url": "/sql",
+      "name": "SQL Project"
+    },
+    {
+      "description": "Authored a comprehensive Business Requirements Document (BRD) for a Linux Cluster Monitoring Agent project, meticulously detailing the project scope, business requirements, timeline, and cost-benefit analysis. Orchestrated an elicitation meeting with stakeholders and crafted a concise System Requirements Document (SRD) for a Retail Stock Trading Application. Effectively translated business needs into technical specifications by creating architecture and ER diagrams, and communicating thorough use cases and data requirements.",
+      "git_url": "/",
+      "name": "BSA Crash Course"
+    },
+    {
+      "description": "Developed a JDBC app to connect to a PSQL database and allow the user to perform CRUD operations to the database from Java.",
+      "git_url": "/core_java/jdbc",
+      "name": "JDBC App"
     }
   ],
   "name": "Katie Ing",
