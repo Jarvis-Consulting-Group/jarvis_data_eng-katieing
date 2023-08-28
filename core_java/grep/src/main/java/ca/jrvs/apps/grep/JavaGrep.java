@@ -2,7 +2,9 @@ package ca.jrvs.apps.grep;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface JavaGrep {
 
@@ -20,6 +22,13 @@ public interface JavaGrep {
     List<File> listFiles(String rootDir);
 
     /**
+     * Traverse a given directory and return all files
+     * @param rootDir input directory
+     * @return stream of files
+     */
+    Stream<Path> listFilesStream(String rootDir);
+
+    /**
      * Read a file and return all of the lines
      *
      * Explain FileReader, BufferedReader, and character encoding ????
@@ -29,6 +38,17 @@ public interface JavaGrep {
      * @throws IllegalArgumentException if a given inputFile is not a file
      */
     List<String> readLines(File inputFile);
+
+    /**
+     * Read a file and return all of the lines
+     *
+     * Explain FileReader, BufferedReader, and character encoding ????
+     *
+     * @param inputFilePath file path to be read
+     * @return lines
+     * @throws IllegalArgumentException if a given inputFile is not a file
+     */
+    Stream<String> readLinesStream(Path inputFilePath);
 
     /**
      * Check if a line contains the regex pattern (passed by user)
@@ -46,6 +66,16 @@ public interface JavaGrep {
      * @throws IOException if write failed
      */
     void writeToFile(List<String> lines) throws IOException;
+
+    /**
+     * Write lines to a file
+     *
+     * Explore: FileOutputStream, OutputStreamWriter, and BufferedWriter
+     *
+     * @param lines matched line
+     * @throws IOException if write failed
+     */
+    void writeStreamToFile(Stream<String> lines) throws IOException;
 
     String getRootPath();
 
