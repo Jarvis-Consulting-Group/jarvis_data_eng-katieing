@@ -56,7 +56,8 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
     public Stream<String> readLinesStream(Path inputFilePath) {
 
         try {
-            return Files.lines(inputFilePath);
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFilePath.toFile()));
+            return bufferedReader.lines();
         } catch (IOException e) {
             logger.error("Error", e);
             return null;
@@ -83,8 +84,6 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
             bw.flush();
         } catch (IOException e) {
             logger.error("Error creating BufferedWriter", e);
-        } catch (UncheckedIOException e) {
-            logger.error("What is this lol", e);
         }
     }
 

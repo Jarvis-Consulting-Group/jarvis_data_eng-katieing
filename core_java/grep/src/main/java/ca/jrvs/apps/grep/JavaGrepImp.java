@@ -2,7 +2,6 @@ package ca.jrvs.apps.grep;
 
 import com.sun.org.slf4j.internal.Logger;
 import com.sun.org.slf4j.internal.LoggerFactory;
-
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ public class JavaGrepImp implements JavaGrep {
         }
 
         //Use default logger config
-        //BasicConfigurator.configure();
+        BasicConfigurator.configure();
 
         JavaGrepImp javaGrepImp = new JavaGrepImp();
         javaGrepImp.setRegex(args[0]);
