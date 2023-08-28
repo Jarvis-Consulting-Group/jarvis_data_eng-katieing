@@ -43,7 +43,7 @@
       "name": "BSA Crash Course"
     },
     {
-      "description": "Developed a JDBC app to connect to a PSQL database and allow the user to perform CRUD operations to the database from Java.",
+      "description": "Developed a JDBC application that interfaces with a PostgreSQL database, enabling CRUD operations for a database within a retail context. Leveraged Java to connect to a sales database, offering functionalities like customer data manipulation and retrieval, as well as order and order item data retrieval. Employed Maven for efficient build management.",
       "git_url": "/core_java/jdbc",
       "name": "JDBC App"
     }

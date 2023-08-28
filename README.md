@@ -19,7 +19,7 @@ Project source code: [https://github.com/jarviscanada/jarvis_data_eng-katieing](
 
 **BSA Crash Course** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng-katieing/tree/master/)]: Authored a comprehensive Business Requirements Document (BRD) for a Linux Cluster Monitoring Agent project, meticulously detailing the project scope, business requirements, timeline, and cost-benefit analysis. Orchestrated an elicitation meeting with stakeholders and crafted a concise System Requirements Document (SRD) for a Retail Stock Trading Application. Effectively translated business needs into technical specifications by creating architecture and ER diagrams, and communicating thorough use cases and data requirements.
 
-**JDBC App** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng-katieing/tree/master/core_java/jdbc)]: Developed a JDBC app to connect to a PSQL database and allow the user to perform CRUD operations to the database from Java.
+**JDBC App** [[GitHub](https://github.com/jarviscanada/jarvis_data_eng-katieing/tree/master/core_java/jdbc)]: Developed a JDBC application that interfaces with a PostgreSQL database, enabling CRUD operations for a database within a retail context. Leveraged Java to connect to a sales database, offering functionalities like customer data manipulation and retrieval, as well as order and order item data retrieval. Employed Maven for efficient build management.
 
 
 ## Highlighted Projects
