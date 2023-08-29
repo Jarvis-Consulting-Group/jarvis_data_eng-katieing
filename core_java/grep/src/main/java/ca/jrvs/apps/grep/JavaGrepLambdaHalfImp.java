@@ -1,5 +1,7 @@
 package ca.jrvs.apps.grep;
 
+import org.apache.log4j.BasicConfigurator;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,7 +17,7 @@ public class JavaGrepLambdaHalfImp extends JavaGrepImp {
         }
 
         //Use default logger config
-        //BasicConfigurator.configure();
+        BasicConfigurator.configure();
 
         JavaGrepLambdaHalfImp lambdaHalf = new JavaGrepLambdaHalfImp();
         lambdaHalf.setRegex(args[0]);

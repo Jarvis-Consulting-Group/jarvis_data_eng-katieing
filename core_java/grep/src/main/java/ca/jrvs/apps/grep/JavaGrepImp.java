@@ -29,7 +29,7 @@ public class JavaGrepImp implements JavaGrep {
         //Use default logger config
         BasicConfigurator.configure();
 
-        //Constuct JavaGrepImp and set properties
+        //Construct JavaGrepImp and set properties
         JavaGrepImp javaGrepImp = new JavaGrepImp();
         javaGrepImp.setRegex(args[0]);
         javaGrepImp.setRootPath(args[1]);
@@ -68,7 +68,7 @@ public class JavaGrepImp implements JavaGrep {
         //Create output list
         List<File> files = new ArrayList<>();
 
-        //Convert rootDir string to file and "open" if directory, list itself if file, else throw exception.
+        //Convert rootDir string to file and "open" if it's directory, list itself if it's file, else throw exception.
         File dir = new File(rootDir);
         if (dir.exists() && dir.isDirectory()) {
             File[] openedDirectory = new File(rootDir).listFiles();
@@ -85,7 +85,7 @@ public class JavaGrepImp implements JavaGrep {
         } else if (dir.isFile()) {
             files.add(dir);
         } else {
-            throw new IllegalArgumentException("Directory " + rootDir + " does not exist");
+            throw new IllegalArgumentException("rootDir does not exist");
         }
         return files;
     }
@@ -108,7 +108,7 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public Stream<String> readLinesStream(Path inputFilePath) throws IOException {
+    public Stream<String> readLinesStream(Path inputFilePath) {
         return null;
     }
 

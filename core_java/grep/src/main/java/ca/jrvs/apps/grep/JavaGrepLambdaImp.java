@@ -32,11 +32,10 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
     @Override
     public void process() throws IOException {
 
-        try (Stream<String> matchedLines = listFilesStream(this.getRootPath())
+        Stream<String> matchedLines = listFilesStream(this.getRootPath())
                 .flatMap(this::readLinesStream)
-                .filter(this::containsPattern)) {
-            writeStreamToFile(matchedLines);
-        }
+                .filter(this::containsPattern);
+        writeStreamToFile(matchedLines);
     }
 
     @Override
@@ -72,6 +71,8 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
                 throw new RuntimeException("Failed to write to file", e);
             }
         });
+
+        bw.flush();
     }
 
 }
