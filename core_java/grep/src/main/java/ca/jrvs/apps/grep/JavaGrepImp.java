@@ -1,7 +1,10 @@
 package ca.jrvs.apps.grep;
 
-import com.sun.org.slf4j.internal.Logger;
-import com.sun.org.slf4j.internal.LoggerFactory;
+
+import org.apache.log4j.BasicConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -26,6 +29,7 @@ public class JavaGrepImp implements JavaGrep {
         //Use default logger config
         BasicConfigurator.configure();
 
+        //Constuct JavaGrepImp and set properties
         JavaGrepImp javaGrepImp = new JavaGrepImp();
         javaGrepImp.setRegex(args[0]);
         javaGrepImp.setRootPath(args[1]);
@@ -59,13 +63,17 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public List<File> listFiles(String rootDir) throws NullPointerException, IllegalArgumentException {
+    public List<File> listFiles(String rootDir) throws IllegalArgumentException, IOException {
 
-        //add exception for if dir does not exist?
+        //Create output list
         List<File> files = new ArrayList<>();
+
+        //Convert rootDir string to file and "open" if directory, list itself if file, else throw exception.
         File dir = new File(rootDir);
         if (dir.exists() && dir.isDirectory()) {
             File[] openedDirectory = new File(rootDir).listFiles();
+            assert openedDirectory != null;
+            //if item in directory is another directory, call listFiles to begin recursion. else, add to files list.
             for (File file : openedDirectory) {
                 if (file.isDirectory()) {
                     List<File> subFiles = listFiles(file.toString());
@@ -83,12 +91,12 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public Stream<Path> listFilesStream(String rootDir) {
+    public Stream<Path> listFilesStream(String rootDir) throws IOException {
         return null;
     }
 
     @Override
-    public List<String> readLines(File inputFile) {
+    public List<String> readLines(File inputFile) throws IOException {
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile))) {
             String line = bufferedReader.readLine();
@@ -96,15 +104,11 @@ public class JavaGrepImp implements JavaGrep {
                 lines.add(line);
                 line = bufferedReader.readLine();
             }
-        } catch (FileNotFoundException e) {
-            logger.error("Error: " + inputFile + " is directory", e);
-        } catch (IOException e) {
-            logger.error("Error reading lines in " + inputFile, e);
         } return lines;
     }
 
     @Override
-    public Stream<String> readLinesStream(Path inputFilePath) {
+    public Stream<String> readLinesStream(Path inputFilePath) throws IOException {
         return null;
     }
 
@@ -124,8 +128,6 @@ public class JavaGrepImp implements JavaGrep {
                 bufferedWriter.write(line);
                 bufferedWriter.newLine();
             }
-        } catch (IOException e) {
-            throw e;
         }
     }
 

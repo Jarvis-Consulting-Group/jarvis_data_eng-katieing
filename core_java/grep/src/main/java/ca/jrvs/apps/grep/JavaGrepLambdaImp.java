@@ -1,5 +1,6 @@
 package ca.jrvs.apps.grep;
 
+import org.apache.log4j.BasicConfigurator;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,7 +15,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
         }
 
         //Use default logger config
-        //BasicConfigurator.configure();
+        BasicConfigurator.configure();
 
         JavaGrepLambdaImp javaGrepLambdaImp = new JavaGrepLambdaImp();
         javaGrepLambdaImp.setRegex(args[0]);
@@ -35,57 +36,42 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
                 .flatMap(this::readLinesStream)
                 .filter(this::containsPattern)) {
             writeStreamToFile(matchedLines);
-        } catch (IllegalStateException e) {
-            System.out.println("oh no");
         }
     }
 
     @Override
-    public Stream<Path> listFilesStream(String rootDir) {
+    public Stream<Path> listFilesStream(String rootDir) throws IOException {
 
-        try {
-            return Files.find(Paths.get(rootDir), 99,
-                    (path, basicFileAttributes) -> path.toFile().isFile());
-        } catch (IOException e) {
-            logger.error("I/O Error when accessing " + rootDir, e);
-            return null;
-        }
+        return Files.find(Paths.get(rootDir), 99,
+                (path, basicFileAttributes) -> path.toFile().isFile());
     }
 
     @Override
     public Stream<String> readLinesStream(Path inputFilePath) {
 
+        BufferedReader bufferedReader;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFilePath.toFile()));
-            return bufferedReader.lines();
-        } catch (IOException e) {
-            logger.error("Error", e);
-            return null;
+            bufferedReader = new BufferedReader(new FileReader(inputFilePath.toFile()));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("File not found", e);
         }
+        return bufferedReader.lines();
+
     }
 
     @Override
     public void writeStreamToFile(Stream<String> lines) throws IOException {
-        try (BufferedWriter bw = new BufferedWriter(
-                new OutputStreamWriter(Files.newOutputStream(Paths.get(this.getOutFile()))))) {
+        BufferedWriter bw = new BufferedWriter(
+                new OutputStreamWriter(Files.newOutputStream(Paths.get(this.getOutFile()))));
 
-            lines.forEach(line -> {
-                try {
-                    bw.write(line);
-                    bw.newLine();
-                } catch (IOException e) {
-                    logger.error("Error writing to file", e);
-                } catch (UncheckedIOException e) {
-                    logger.error("Error with line " + line);
-                }
-            });
-
-            // Flush and close the BufferedWriter after writing
-            bw.flush();
-        } catch (IOException e) {
-            logger.error("Error creating BufferedWriter", e);
-        }
+        lines.forEach(line -> {
+            try {
+                bw.write(line);
+                bw.newLine();
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to write to file", e);
+            }
+        });
     }
-
 
 }
