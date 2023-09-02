@@ -21,6 +21,8 @@ public class JavaGrepImp implements JavaGrep {
     private String rootPath;
     private String outFile;
 
+    public List<String> unreadable;
+
     public static void main(String[] args) {
         if (args.length != 3) {
             throw new IllegalArgumentException("USAGE: JavaGrep regex rootPath outFile");
@@ -34,12 +36,16 @@ public class JavaGrepImp implements JavaGrep {
         javaGrepImp.setRegex(args[0]);
         javaGrepImp.setRootPath(args[1]);
         javaGrepImp.setOutFile(args[2]);
-
+        javaGrepImp.unreadable = new ArrayList<>();
 
         try {
             javaGrepImp.process();
         } catch (Exception ex) {
             javaGrepImp.logger.error("Error: Unable to process", ex);
+        }
+
+        if (!javaGrepImp.unreadable.isEmpty()) {
+            javaGrepImp.logger.info("The following cannot be read: {}", javaGrepImp.unreadable);
         }
     }
 
@@ -63,23 +69,31 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public List<File> listFiles(String rootDir) throws IllegalArgumentException, IOException {
+    public List<File> listFiles(String rootDir) throws IOException {
 
         //Create output list
         List<File> files = new ArrayList<>();
 
         //Convert rootDir string to file and "open" if directory, list itself if file, else throw exception.
         File dir = new File(rootDir);
-        if (dir.exists() && dir.isDirectory()) {
-            File[] openedDirectory = new File(rootDir).listFiles();
-            assert openedDirectory != null;
-            //if item in directory is another directory, call listFiles to begin recursion. else, add to files list.
-            for (File file : openedDirectory) {
-                if (file.isDirectory()) {
-                    List<File> subFiles = listFiles(file.toString());
-                    files.addAll(subFiles);
+        if (dir.isDirectory()) {
+            try {
+                File[] openedDirectory = dir.listFiles();
+                //if item in directory is another directory, call listFiles to begin recursion. else, add to files list.
+                assert openedDirectory != null;
+                for (File file : openedDirectory) {
+                    if (file.isDirectory()) {
+                        List<File> subFiles = listFiles(file.toString());
+                        files.addAll(subFiles);
+                    } else {
+                        files.add(file);
+                    }
+                }
+            } catch (NullPointerException e) {
+                if (!dir.canRead()) {
+                    unreadable.add("Directory: " + rootDir);
                 } else {
-                    files.add(file);
+                    throw e;
                 }
             }
         } else if (dir.isFile()) {
@@ -103,6 +117,12 @@ public class JavaGrepImp implements JavaGrep {
             while (line != null) {
                 lines.add(line);
                 line = bufferedReader.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            if (!inputFile.canRead()) {
+                unreadable.add("File: " + inputFile);
+            } else {
+                throw e;
             }
         } return lines;
     }
