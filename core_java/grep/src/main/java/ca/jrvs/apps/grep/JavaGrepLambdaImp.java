@@ -2,7 +2,6 @@ package ca.jrvs.apps.grep;
 
 import org.apache.log4j.BasicConfigurator;
 import java.io.*;
-import java.nio.file.AccessDeniedException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,18 +35,16 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
         Stream<String> matchedLines = listFilesStream(this.getRootPath())
                 .flatMap(this::readLinesStream)
                 .filter(this::containsPattern);
-        writeStreamToFile(matchedLines);
+        writeToFile(matchedLines);
 
     }
 
-    @Override
     public Stream<Path> listFilesStream(String rootDir) throws IOException {
 
         return Files.find(Paths.get(rootDir), 99,
                 (path, basicFileAttributes) -> path.toFile().isFile());
     }
 
-    @Override
     public Stream<String> readLinesStream(Path inputFilePath) {
 
         BufferedReader bufferedReader;
@@ -57,11 +54,9 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
             throw new RuntimeException("File not found", e);
         }
         return bufferedReader.lines();
-
     }
 
-    @Override
-    public void writeStreamToFile(Stream<String> lines) throws IOException {
+    public void writeToFile(Stream<String> lines) throws IOException {
         BufferedWriter bw = new BufferedWriter(
                 new OutputStreamWriter(Files.newOutputStream(Paths.get(this.getOutFile()))));
 

@@ -105,11 +105,6 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public Stream<Path> listFilesStream(String rootDir) throws IOException {
-        return null;
-    }
-
-    @Override
     public List<String> readLines(File inputFile) throws IOException {
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile))) {
@@ -125,11 +120,6 @@ public class JavaGrepImp implements JavaGrep {
                 throw e;
             }
         } return lines;
-    }
-
-    @Override
-    public Stream<String> readLinesStream(Path inputFilePath) throws IOException {
-        return null;
     }
 
     @Override
@@ -149,10 +139,6 @@ public class JavaGrepImp implements JavaGrep {
                 bufferedWriter.newLine();
             }
         }
-    }
-
-    @Override
-    public void writeStreamToFile(Stream<String> lines) throws IOException {
     }
 
 
