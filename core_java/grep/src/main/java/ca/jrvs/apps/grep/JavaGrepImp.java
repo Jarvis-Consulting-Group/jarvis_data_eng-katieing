@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class JavaGrepImp implements JavaGrep {
 
@@ -44,9 +43,6 @@ public class JavaGrepImp implements JavaGrep {
             javaGrepImp.logger.error("Error: Unable to process", ex);
         }
 
-        if (!javaGrepImp.unreadable.isEmpty()) {
-            javaGrepImp.logger.info("The following cannot be read: {}", javaGrepImp.unreadable);
-        }
     }
 
     @Override
@@ -66,6 +62,11 @@ public class JavaGrepImp implements JavaGrep {
         }
         //Write matched lines to file
         writeToFile(matchedLines);
+
+        //Report files/dirs that were skipped
+        if (!unreadable.isEmpty()) {
+            logger.info("The following cannot be read: {}", unreadable);
+        }
     }
 
     @Override
