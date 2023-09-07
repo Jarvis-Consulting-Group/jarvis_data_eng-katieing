@@ -5,7 +5,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 public class JavaGrepLambdaImp extends JavaGrepImp {
@@ -22,7 +21,6 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
         javaGrepLambdaImp.setRegex(args[0]);
         javaGrepLambdaImp.setRootPath(args[1]);
         javaGrepLambdaImp.setOutFile(args[2]);
-        javaGrepLambdaImp.unreadable = new ArrayList<>();
 
         try {
             javaGrepLambdaImp.process();
@@ -70,6 +68,7 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
                 throw new RuntimeException("Failed to write to file", e);
             }
         });
+        bw.flush();
     }
 
 }

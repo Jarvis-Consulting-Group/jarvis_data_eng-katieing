@@ -35,7 +35,6 @@ public class JavaGrepImp implements JavaGrep {
         javaGrepImp.setRegex(args[0]);
         javaGrepImp.setRootPath(args[1]);
         javaGrepImp.setOutFile(args[2]);
-        javaGrepImp.unreadable = new ArrayList<>();
 
         try {
             javaGrepImp.process();
@@ -62,11 +61,6 @@ public class JavaGrepImp implements JavaGrep {
         }
         //Write matched lines to file
         writeToFile(matchedLines);
-
-        //Report files/dirs that were skipped
-        if (!unreadable.isEmpty()) {
-            logger.info("The following cannot be read: {}", unreadable);
-        }
     }
 
     @Override
@@ -78,23 +72,15 @@ public class JavaGrepImp implements JavaGrep {
         //Convert rootDir string to file and "open" if directory, list itself if file, else throw exception.
         File dir = new File(rootDir);
         if (dir.isDirectory()) {
-            try {
-                File[] openedDirectory = dir.listFiles();
-                //if item in directory is another directory, call listFiles to begin recursion. else, add to files list.
-                assert openedDirectory != null;
-                for (File file : openedDirectory) {
-                    if (file.isDirectory()) {
-                        List<File> subFiles = listFiles(file.toString());
-                        files.addAll(subFiles);
-                    } else {
-                        files.add(file);
-                    }
-                }
-            } catch (NullPointerException e) {
-                if (!dir.canRead()) {
-                    unreadable.add("Directory: " + rootDir);
+            File[] openedDirectory = dir.listFiles();
+            //if item in directory is another directory, call listFiles to begin recursion. else, add to files list.
+            assert openedDirectory != null;
+            for (File file : openedDirectory) {
+                if (file.isDirectory()) {
+                    List<File> subFiles = listFiles(file.toString());
+                    files.addAll(subFiles);
                 } else {
-                    throw e;
+                    files.add(file);
                 }
             }
         } else if (dir.isFile()) {
@@ -108,19 +94,13 @@ public class JavaGrepImp implements JavaGrep {
     @Override
     public List<String> readLines(File inputFile) throws IOException {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile))) {
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                lines.add(line);
-                line = bufferedReader.readLine();
-            }
-        } catch (FileNotFoundException e) {
-            if (!inputFile.canRead()) {
-                unreadable.add("File: " + inputFile);
-            } else {
-                throw e;
-            }
-        } return lines;
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile));
+        String line = bufferedReader.readLine();
+        while (line != null) {
+            lines.add(line);
+            line = bufferedReader.readLine();
+        }
+        return lines;
     }
 
     @Override
@@ -133,13 +113,13 @@ public class JavaGrepImp implements JavaGrep {
     @Override
     public void writeToFile(List<String> lines) throws IOException {
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(
-                new OutputStreamWriter(Files.newOutputStream(Paths.get(outFile))))) {
-            for (String line : lines) {
-                bufferedWriter.write(line);
-                bufferedWriter.newLine();
-            }
+        BufferedWriter bufferedWriter = new BufferedWriter(
+                new OutputStreamWriter(Files.newOutputStream(Paths.get(outFile))));
+        for (String line : lines) {
+            bufferedWriter.write(line);
+            bufferedWriter.newLine();
         }
+        bufferedWriter.flush();
     }
 
 
