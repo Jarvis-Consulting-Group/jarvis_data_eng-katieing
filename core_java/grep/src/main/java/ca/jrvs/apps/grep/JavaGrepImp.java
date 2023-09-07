@@ -19,7 +19,6 @@ public class JavaGrepImp implements JavaGrep {
     private String regex;
     private String rootPath;
     private String outFile;
-
     public List<String> unreadable;
 
     public static void main(String[] args) {
@@ -65,7 +64,7 @@ public class JavaGrepImp implements JavaGrep {
 
         //Report files/dirs that were skipped
         if (!unreadable.isEmpty()) {
-            logger.info("The following cannot be read: {}", unreadable);
+            logger.info("The following have restricted read access and cannot be read: {}", unreadable);
         }
     }
 
@@ -90,8 +89,9 @@ public class JavaGrepImp implements JavaGrep {
                         files.add(file);
                     }
                 }
+                //Catch exception that is thrown if openedDirectory is null (likely means access not permitted?)
             } catch (NullPointerException e) {
-                if (!dir.canRead()) {
+                if (!dir.canRead()) { //if exception is caused by read access, skip dir
                     unreadable.add("Directory: " + rootDir);
                 } else {
                     throw e;
@@ -100,7 +100,7 @@ public class JavaGrepImp implements JavaGrep {
         } else if (dir.isFile()) {
             files.add(dir);
         } else {
-            throw new IllegalArgumentException("Directory " + rootDir + " does not exist");
+            throw new IllegalArgumentException("Directory does not exist");
         }
         return files;
     }
@@ -115,7 +115,7 @@ public class JavaGrepImp implements JavaGrep {
                 line = bufferedReader.readLine();
             }
         } catch (FileNotFoundException e) {
-            if (!inputFile.canRead()) {
+            if (!inputFile.canRead()) { //if exception is caused by read access, skip file
                 unreadable.add("File: " + inputFile);
             } else {
                 throw e;
