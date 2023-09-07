@@ -6,9 +6,12 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+
 public class JavaGrepLambdaHalfImp extends JavaGrepImp {
 
     public static void main(String[] args) {
@@ -23,6 +26,7 @@ public class JavaGrepLambdaHalfImp extends JavaGrepImp {
         lambdaHalf.setRegex(args[0]);
         lambdaHalf.setRootPath(args[1]);
         lambdaHalf.setOutFile(args[2]);
+        lambdaHalf.unreadable = new ArrayList<>();
 
         try {
             lambdaHalf.process();
@@ -31,13 +35,36 @@ public class JavaGrepLambdaHalfImp extends JavaGrepImp {
         }
     }
 
+    public Stream<Path> listFilesStream(String rootDir) throws IOException {
+
+        Path path = Paths.get(rootDir);
+        File file = path.toFile();
+
+        if (file.isFile()) {
+            return Stream.of(path);
+        } else {
+            return Files.list(path)
+                    .flatMap(infile -> {
+                        try {
+                            return listFilesStream(infile.toString());
+                        } catch (IOException e) {
+                            if (!infile.toFile().canRead()) {
+                                unreadable.add(infile.toString());
+                            } else {
+                                throw new RuntimeException(e);
+                            }
+                            return null;
+                        }
+                    });
+        }
+
+    }
+
     @Override
     public List<File> listFiles(String rootDir) throws IOException {
 
-        try (Stream<Path> filesStream = Files.find(Paths.get(rootDir), 99,
-                (path, basicFileAttributes) -> path.toFile().isFile())) {
-            return filesStream.map(Path::toFile).collect(Collectors.toList());
-        }
+        return listFilesStream(rootDir).map(Path::toFile).collect(Collectors.toList());
+
     }
 
     @Override
@@ -45,6 +72,13 @@ public class JavaGrepLambdaHalfImp extends JavaGrepImp {
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile))) {
             return bufferedReader.lines().collect(Collectors.toList());
+        } catch (FileNotFoundException e) {
+            if (!inputFile.canRead()) {
+                unreadable.add(inputFile.toString());
+                return null;
+            } else {
+                throw e;
+            }
         }
     }
 

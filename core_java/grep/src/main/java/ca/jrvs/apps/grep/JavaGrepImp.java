@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class JavaGrepImp implements JavaGrep {
 
@@ -20,6 +19,8 @@ public class JavaGrepImp implements JavaGrep {
     private String regex;
     private String rootPath;
     private String outFile;
+
+    public List<String> unreadable;
 
     public static void main(String[] args) {
         if (args.length != 3) {
@@ -35,12 +36,12 @@ public class JavaGrepImp implements JavaGrep {
         javaGrepImp.setRootPath(args[1]);
         javaGrepImp.setOutFile(args[2]);
 
-
         try {
             javaGrepImp.process();
         } catch (Exception ex) {
             javaGrepImp.logger.error("Error: Unable to process", ex);
         }
+
     }
 
     @Override
@@ -63,17 +64,17 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public List<File> listFiles(String rootDir) throws IllegalArgumentException, IOException {
+    public List<File> listFiles(String rootDir) throws IOException {
 
         //Create output list
         List<File> files = new ArrayList<>();
 
         //Convert rootDir string to file and "open" if it's directory, list itself if it's file, else throw exception.
         File dir = new File(rootDir);
-        if (dir.exists() && dir.isDirectory()) {
-            File[] openedDirectory = new File(rootDir).listFiles();
-            assert openedDirectory != null;
+        if (dir.isDirectory()) {
+            File[] openedDirectory = dir.listFiles();
             //if item in directory is another directory, call listFiles to begin recursion. else, add to files list.
+            assert openedDirectory != null;
             for (File file : openedDirectory) {
                 if (file.isDirectory()) {
                     List<File> subFiles = listFiles(file.toString());
@@ -91,13 +92,9 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public Stream<Path> listFilesStream(String rootDir) throws IOException {
-        return null;
-    }
-
-    @Override
     public List<String> readLines(File inputFile) throws IOException {
         List<String> lines = new ArrayList<>();
+<<<<<<< HEAD
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile))) {
             String line = bufferedReader.readLine();
             while (line != null) {
@@ -110,6 +107,15 @@ public class JavaGrepImp implements JavaGrep {
     @Override
     public Stream<String> readLinesStream(Path inputFilePath) {
         return null;
+=======
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile));
+        String line = bufferedReader.readLine();
+        while (line != null) {
+            lines.add(line);
+            line = bufferedReader.readLine();
+        }
+        return lines;
+>>>>>>> feature/lambdastream
     }
 
     @Override
@@ -122,17 +128,13 @@ public class JavaGrepImp implements JavaGrep {
     @Override
     public void writeToFile(List<String> lines) throws IOException {
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(
-                new OutputStreamWriter(Files.newOutputStream(Paths.get(outFile))))) {
-            for (String line : lines) {
-                bufferedWriter.write(line);
-                bufferedWriter.newLine();
-            }
+        BufferedWriter bufferedWriter = new BufferedWriter(
+                new OutputStreamWriter(Files.newOutputStream(Paths.get(outFile))));
+        for (String line : lines) {
+            bufferedWriter.write(line);
+            bufferedWriter.newLine();
         }
-    }
-
-    @Override
-    public void writeStreamToFile(Stream<String> lines) throws IOException {
+        bufferedWriter.flush();
     }
 
 

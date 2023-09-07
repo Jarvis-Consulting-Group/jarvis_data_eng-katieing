@@ -35,31 +35,32 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
         Stream<String> matchedLines = listFilesStream(this.getRootPath())
                 .flatMap(this::readLinesStream)
                 .filter(this::containsPattern);
+<<<<<<< HEAD
         writeStreamToFile(matchedLines);
+=======
+        writeToFile(matchedLines);
+
+>>>>>>> feature/lambdastream
     }
 
-    @Override
     public Stream<Path> listFilesStream(String rootDir) throws IOException {
 
         return Files.find(Paths.get(rootDir), 99,
                 (path, basicFileAttributes) -> path.toFile().isFile());
     }
 
-    @Override
     public Stream<String> readLinesStream(Path inputFilePath) {
 
         BufferedReader bufferedReader;
         try {
             bufferedReader = new BufferedReader(new FileReader(inputFilePath.toFile()));
+            return bufferedReader.lines();
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File not found", e);
         }
-        return bufferedReader.lines();
-
     }
 
-    @Override
-    public void writeStreamToFile(Stream<String> lines) throws IOException {
+    public void writeToFile(Stream<String> lines) throws IOException {
         BufferedWriter bw = new BufferedWriter(
                 new OutputStreamWriter(Files.newOutputStream(Paths.get(this.getOutFile()))));
 
@@ -71,7 +72,10 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
                 throw new RuntimeException("Failed to write to file", e);
             }
         });
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature/lambdastream
         bw.flush();
     }
 
