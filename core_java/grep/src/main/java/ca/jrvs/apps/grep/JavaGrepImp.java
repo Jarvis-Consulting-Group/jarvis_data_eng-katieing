@@ -20,8 +20,6 @@ public class JavaGrepImp implements JavaGrep {
     private String rootPath;
     private String outFile;
 
-    public List<String> unreadable;
-
     public static void main(String[] args) {
         if (args.length != 3) {
             throw new IllegalArgumentException("USAGE: JavaGrep regex rootPath outFile");
@@ -64,7 +62,7 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public List<File> listFiles(String rootDir) throws IOException {
+    public List<File> listFiles(String rootDir) {
 
         //Create output list
         List<File> files = new ArrayList<>();
