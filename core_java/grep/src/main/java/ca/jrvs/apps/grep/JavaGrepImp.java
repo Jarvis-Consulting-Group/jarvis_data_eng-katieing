@@ -48,13 +48,13 @@ public class JavaGrepImp implements JavaGrep {
     @Override
     public void process() throws IOException {
         List<String> matchedLines = new ArrayList<>();
-        //Loop through files in root directory using listFiles() method
+        //Loop through files in root directory using listFiles()
         List<File> files = listFiles(rootPath);
         for (File file : files) {
             List<String> lines = readLines(file);
-            //Loop through lines in file using readLines() method
+            //Loop through lines in file using readLines()
             for (String line : lines) {
-                //Check if line contains pattern using containsPattern() method
+                //Check if line contains pattern using containsPattern()
                 if (containsPattern(line)) {
                     matchedLines.add(line);
                 }
@@ -70,7 +70,7 @@ public class JavaGrepImp implements JavaGrep {
     }
 
     @Override
-    public List<File> listFiles(String rootDir) throws IOException {
+    public List<File> listFiles(String rootDir) {
 
         //Create output list
         List<File> files = new ArrayList<>();
