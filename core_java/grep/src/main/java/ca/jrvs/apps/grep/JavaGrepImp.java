@@ -92,7 +92,6 @@ public class JavaGrepImp implements JavaGrep {
     @Override
     public List<String> readLines(File inputFile) throws IOException {
         List<String> lines = new ArrayList<>();
-<<<<<<< HEAD
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile))) {
             String line = bufferedReader.readLine();
             while (line != null) {
@@ -100,20 +99,6 @@ public class JavaGrepImp implements JavaGrep {
                 line = bufferedReader.readLine();
             }
         } return lines;
-    }
-
-    @Override
-    public Stream<String> readLinesStream(Path inputFilePath) {
-        return null;
-=======
-        BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile));
-        String line = bufferedReader.readLine();
-        while (line != null) {
-            lines.add(line);
-            line = bufferedReader.readLine();
-        }
-        return lines;
->>>>>>> feature/lambdastream
     }
 
     @Override

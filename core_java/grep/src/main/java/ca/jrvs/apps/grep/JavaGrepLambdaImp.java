@@ -35,12 +35,8 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
         Stream<String> matchedLines = listFilesStream(this.getRootPath())
                 .flatMap(this::readLinesStream)
                 .filter(this::containsPattern);
-<<<<<<< HEAD
-        writeStreamToFile(matchedLines);
-=======
         writeToFile(matchedLines);
 
->>>>>>> feature/lambdastream
     }
 
     public Stream<Path> listFilesStream(String rootDir) throws IOException {
@@ -72,10 +68,6 @@ public class JavaGrepLambdaImp extends JavaGrepImp {
                 throw new RuntimeException("Failed to write to file", e);
             }
         });
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/lambdastream
         bw.flush();
     }
 
