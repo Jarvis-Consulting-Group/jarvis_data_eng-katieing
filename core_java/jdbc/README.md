@@ -10,8 +10,19 @@ This app uses Maven for build management.
 ![ER Diagram](./Diagrams/JDBC_ERD.png)
 
 ## Design Patterns
-Discuss DAO and Repository design patterns (150-200 words)
 
+This app uses a DAO design pattern. A summary and comparison of DAO and Repository design patterns is below: 
+
+#### DAO
+In the DAO design pattern, DAO classes are used for each entity (eg. CustomerDAO, OrderDao) and
+the methods based on each CRUD operation are created to directly reflect the RDBMS structure. 
+Table joins and complex querying is done at the 
+database level.
+
+#### Repository
+In the repository design pattern, a repository class for each entity is used with higher level entity operations
+(eg. findOrderById(), findOrderLines()). This results in less complex queries being executed on PSQL, with
+operations on the data likely taking place within the JDBC app. 
 
 
 # Test
