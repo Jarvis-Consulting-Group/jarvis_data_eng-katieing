@@ -2,15 +2,23 @@ package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
+import org.apache.http.HttpRequest;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.apache.tomcat.util.codec.binary.StringUtils;
+import org.json.JSONObject;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -22,8 +30,9 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     private static final String IEX_BATCH_PATH = "/stock/market/batch?symbols=%s&types=quote&token=";
     private final String IEX_BATCH_URL;
 
-    private Logger logger = LoggerFactory.getLogger(MarketDataDao.class);
+    //private Logger logger = LoggerFactory.getLogger(MarketDataDao.class);
     private HttpClientConnectionManager httpClientConnectionManager;
+    private JSONObject thisQuote;
 
     @Autowired
     public MarketDataDao(HttpClientConnectionManager httpClientConnectionManager, MarketDataConfig marketDataConfig) {
@@ -37,11 +46,18 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
      * Tip: use EntityUtils.toString to process HTTP entity
      *
      * @param url resource URL
-     * @return http response boy or Optional empty for 404 response
+     * @return http response body or Optional empty for 404 response
      * @throws DataRetrievalFailureException if HTTP failed or status code is unexpected
      */
     private Optional<String> executeHttpGet(String url) {
-        return Optional.empty();
+
+        try (CloseableHttpClient client = getHttpClient()) {
+            HttpGet httpGet = new HttpGet(url);
+            CloseableHttpResponse response = client.execute(httpGet);
+            return Optional.of(EntityUtils.toString(response.getEntity()));
+        } catch (IOException e) {
+            throw new DataRetrievalFailureException("HTTP Failed");
+        }
     }
 
     /**
@@ -58,7 +74,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
     /**
      * Get an IexQuote (helper method which class findAllById)
-     * 
+     *
      * @param ticker must not be {@literal null}.
      * @throws IllegalArgumentException if a given ticker is invalid
      * @throws DataRetrievalFailureException if HTTP request failed
@@ -88,7 +104,37 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
      */
     @Override
     public List<IexQuote> findAllById(Iterable<String> tickers) {
-        return null;
+
+        int tickerCount = 0;
+        StringBuilder builder = new StringBuilder();
+        for (String ticker : tickers) {
+            builder.append(ticker).append(',');
+            tickerCount++;
+        }
+
+        if (tickerCount == 0) {
+            throw new IllegalArgumentException("Tickers is empty");
+        }
+
+        Optional<String> body = executeHttpGet(String.format(IEX_BATCH_URL, builder));
+        List<IexQuote> quotes = new ArrayList<>();
+
+        //create iexquote for each block
+        if (body.isPresent()) {
+            String bodyText = body.get();
+            JSONObject allQuotes = new JSONObject(bodyText);
+
+            if (allQuotes.length() != tickerCount) {
+                throw new IllegalArgumentException("Invalid ticker");
+            }
+
+            for (String quote : allQuotes.keySet()) {
+                IexQuote newQuote = new IexQuote((JSONObject) ((JSONObject) allQuotes.get(quote)).get("quote"));
+                quotes.add(newQuote);
+            }
+        }
+
+        return quotes;
     }
 
     @Override
