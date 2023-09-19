@@ -2,15 +2,16 @@ package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
-import org.apache.http.HttpRequest;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.apache.tomcat.util.codec.binary.StringUtils;
-import org.json.JSONObject;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
@@ -18,11 +19,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.logging.Logger;
+import java.util.*;
 
 @Repository
 public class MarketDataDao implements CrudRepository<IexQuote, String> {
@@ -30,9 +27,8 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     private static final String IEX_BATCH_PATH = "/stock/market/batch?symbols=%s&types=quote&token=";
     private final String IEX_BATCH_URL;
 
-    //private Logger logger = LoggerFactory.getLogger(MarketDataDao.class);
+    private Logger logger = LoggerFactory.getLogger(MarketDataDao.class);
     private HttpClientConnectionManager httpClientConnectionManager;
-    private JSONObject thisQuote;
 
     @Autowired
     public MarketDataDao(HttpClientConnectionManager httpClientConnectionManager, MarketDataConfig marketDataConfig) {
@@ -54,9 +50,15 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
         try (CloseableHttpClient client = getHttpClient()) {
             HttpGet httpGet = new HttpGet(url);
             CloseableHttpResponse response = client.execute(httpGet);
-            return Optional.of(EntityUtils.toString(response.getEntity()));
+            if (response.getStatusLine().getStatusCode() == 200) {
+                return Optional.of(EntityUtils.toString(response.getEntity()));
+            } else if (response.getStatusLine().getStatusCode() == 404) {
+                return Optional.empty();
+            } else {
+                throw new DataRetrievalFailureException("Retrieval error: " + response.getStatusLine());
+            }
         } catch (IOException e) {
-            throw new DataRetrievalFailureException("HTTP Failed");
+            throw new DataRetrievalFailureException("HTTP Failed ", e);
         }
     }
 
@@ -105,33 +107,28 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     @Override
     public List<IexQuote> findAllById(Iterable<String> tickers) {
 
-        int tickerCount = 0;
-        StringBuilder builder = new StringBuilder();
-        for (String ticker : tickers) {
-            builder.append(ticker).append(',');
-            tickerCount++;
-        }
+        String symbols = StringUtils.join(tickers, ",");
 
-        if (tickerCount == 0) {
-            throw new IllegalArgumentException("Tickers is empty");
-        }
-
-        Optional<String> body = executeHttpGet(String.format(IEX_BATCH_URL, builder));
+        Optional<String> body = executeHttpGet(String.format(IEX_BATCH_URL, symbols));
         List<IexQuote> quotes = new ArrayList<>();
 
-        //create iexquote for each block
-        if (body.isPresent()) {
-            String bodyText = body.get();
-            JSONObject allQuotes = new JSONObject(bodyText);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            JsonNode allQuotes = objectMapper.readTree(body.get());
 
-            if (allQuotes.length() != tickerCount) {
-                throw new IllegalArgumentException("Invalid ticker");
+            for (String ticker : tickers) {
+                ticker = ticker.toUpperCase();
+                if (allQuotes.has(ticker)) {
+                    IexQuote quote = objectMapper.treeToValue(allQuotes.get(ticker).get("quote"), IexQuote.class);
+                    quotes.add(quote);
+                } else {
+                    throw new IllegalArgumentException("Invalid ticker: " + ticker);
+                }
             }
-
-            for (String quote : allQuotes.keySet()) {
-                IexQuote newQuote = new IexQuote((JSONObject) ((JSONObject) allQuotes.get(quote)).get("quote"));
-                quotes.add(newQuote);
-            }
+        } catch (NoSuchElementException e) {
+            throw new IllegalArgumentException("Invalid ticker(s): " + tickers, e);
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Unable to parse quote: ", e);
         }
 
         return quotes;

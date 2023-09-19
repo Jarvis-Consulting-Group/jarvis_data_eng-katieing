@@ -1,7 +1,5 @@
 package ca.jrvs.apps.trading.model.domain;
 
-import org.json.JSONObject;
-
 import javax.annotation.Generated;
 
 @Generated("jsonschema2pojo")
@@ -63,66 +61,6 @@ public class IexQuote {
     private Long lastTradeTime;
     private String currency;
     private Boolean isUSMarketOpen;
-
-    public IexQuote(JSONObject jo) {
-
-        this.symbol = jo.isNull("symbol") ? null : jo.getString("symbol");
-        this.highTime = jo.isNull("highTime") ? null : jo.getLong("highTime");
-        this.avgTotalVolume = jo.isNull("avgTotalVolume") ? null : jo.getInt("avgTotalVolume");
-        this.companyName = jo.isNull("companyName") ? null : jo.getString("companyName");
-        this.openSource = jo.isNull("openSource") ? null : jo.getString("openSource");
-        this.delayedPrice = jo.isNull("delayedPrice") ? null : jo.getDouble("delayedPrice");
-        this.iexMarketPercent = jo.isNull("iexMarketPercent") ? null : jo.getDouble("iexMarketPercent");
-        this.primaryExchange = jo.isNull("primaryExchange") ? null : jo.getString("primaryExchange");
-        this.latestUpdate = jo.isNull("latestUpdate") ? null : jo.getLong("latestUpdate");
-        this.high = jo.isNull("high") ? null : jo.getDouble("high");
-        this.iexOpenTime = jo.isNull("iexOpenTime") ? null : jo.getLong("iexOpenTime");
-        this.delayedPriceTime = jo.isNull("delayedPriceTime") ? null : jo.getLong("delayedPriceTime");
-        this.extendedPrice = jo.isNull("extendedPrice") ? null : jo.getDouble("extendedPrice");
-        this.week52Low = jo.isNull("week52Low") ? null : jo.getDouble("week52Low");
-        this.highSource = jo.isNull("highSource") ? null : jo.getString("highSource");
-        this.latestPrice = jo.isNull("latestPrice") ? null : jo.getDouble("latestPrice");
-        this.marketCap = jo.isNull("marketCap") ? null : jo.getLong("marketCap");
-        this.iexClose = jo.isNull("iexClose") ? null : jo.getDouble("iexClose");
-        this.volume = jo.isNull("volume") ? null : jo.getInt("volume");
-        this.ytdChange = jo.isNull("ytdChange") ? null : jo.getDouble("ytdChange");
-        this.lastTradeTime = jo.isNull("lastTradeTime") ? null : jo.getLong("lastTradeTime");
-        this.closeSource = jo.isNull("closeSource") ? null : jo.getString("closeSource");
-        this.extendedChange = jo.isNull("extendedChange") ? null : jo.getDouble("extendedChange");
-        this.iexRealtimePrice = jo.isNull("iexRealtimePrice") ? null : jo.getDouble("iexRealtimePrice");
-        this.calculationPrice = jo.isNull("calculationPrice") ? null : jo.getString("calculationPrice");
-        this.extendedChangePercent = jo.isNull("extendedChangePercent") ? null : jo.getDouble("extendedChangePercent");
-        this.latestSource = jo.isNull("latestSource") ? null : jo.getString("latestSource");
-        this.iexOpen = jo.isNull("iexOpen") ? null : jo.getDouble("iexOpen");
-        this.iexBidPrice = jo.isNull("iexBidPrice") ? null : jo.getInt("iexBidPrice");
-        this.previousClose = jo.isNull("previousClose") ? null : jo.getDouble("previousClose");
-        this.peRatio = jo.isNull("peRatio") ? null : jo.getDouble("peRatio");
-        this.isUSMarketOpen = jo.isNull("isUSMarketOpen") ? null : jo.getBoolean("isUSMarketOpen");
-        this.low = jo.isNull("low") ? null : jo.getDouble("low");
-        this.oddLotDelayedPrice = jo.isNull("oddLotDelayedPrice") ? null : jo.getDouble("oddLotDelayedPrice");
-        this.extendedPriceTime = jo.isNull("extendedPriceTime") ? null : jo.getLong("extendedPriceTime");
-        this.changePercent = jo.isNull("changePercent") ? null : jo.getDouble("changePercent");
-        this.closeTime = jo.isNull("closeTime") ? null : jo.getLong("closeTime");
-        this.currency = jo.isNull("currency") ? null : jo.getString("currency");
-        this.week52High = jo.isNull("week52High") ? null : jo.getDouble("week52High");
-        this.openTime = jo.isNull("openTime") ? null : jo.getLong("openTime");
-        this.close = jo.isNull("close") ? null : jo.getDouble("close");
-        this.iexCloseTime = jo.isNull("iexCloseTime") ? null : jo.getLong("iexCloseTime");
-        this.oddLotDelayedPriceTime = jo.isNull("oddLotDelayedPriceTime") ? null : jo.getLong("oddLotDelayedPriceTime");
-        this.previousVolume = jo.isNull("previousVolume") ? null : jo.getInt("previousVolume");
-        this.iexRealtimeSize = jo.isNull("iexRealtimeSize") ? null : jo.getInt("iexRealtimeSize");
-        this.iexLastUpdated = jo.isNull("iexLastUpdated") ? null : jo.getLong("iexLastUpdated");
-        this.change = jo.isNull("change") ? null : jo.getDouble("change");
-        this.iexAskPrice = jo.isNull("iexAskPrice") ? null : jo.getInt("iexAskPrice");
-        this.latestVolume = jo.isNull("latestVolume") ? null : jo.getInt("latestVolume");
-        this.lowSource = jo.isNull("lowSource") ? null : jo.getString("lowSource");
-        this.iexVolume = jo.isNull("iexVolume") ? null : jo.getInt("iexVolume");
-        this.iexAskSize = jo.isNull("iexAskSize") ? null : jo.getInt("iexAskSize");
-        this.latestTime = jo.isNull("latestTime") ? null : jo.getString("latestTime");
-        this.iexBidSize = jo.isNull("iexBidSize") ? null : jo.getInt("iexBidSize");
-        this.lowTime = jo.isNull("lowTime") ? null : jo.getLong("lowTime");
-        this.open = jo.isNull("open") ? null : jo.getDouble("open");
-    }
 
     public String getSymbol() {
         return symbol;
