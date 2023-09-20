@@ -108,8 +108,11 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
     public List<IexQuote> findAllById(Iterable<String> tickers) {
 
         String symbols = StringUtils.join(tickers, ",");
-
+        if (symbols.equals("")) {
+            throw new IllegalArgumentException("No tickers provided");
+        }
         Optional<String> body = executeHttpGet(String.format(IEX_BATCH_URL, symbols));
+
         List<IexQuote> quotes = new ArrayList<>();
 
         try {

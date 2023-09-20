@@ -54,7 +54,7 @@ public class MarketDataDaoIntTest {
 
         //sad path
         try {
-            dao.findAllById(Arrays.asList("AA5PL", "FB2"));
+            dao.findAllById(Arrays.asList("AAPL", "FB2"));
             fail();
         } catch (IllegalArgumentException e) {
             assertTrue(true);
@@ -94,6 +94,16 @@ public class MarketDataDaoIntTest {
         //another happy path
         IexQuote lowercaseQuote = dao.findById("aapl").get();
         assertEquals(ticker.toUpperCase(), lowercaseQuote.getSymbol());
+
+        //empty ticker
+        try {
+            dao.findById("");
+            fail();
+        } catch (IllegalArgumentException e) {
+            assertTrue(true);
+        } catch (Exception e) {
+            fail();
+        }
 
         //sad path
         try {
