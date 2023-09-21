@@ -117,7 +117,8 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode allQuotes = objectMapper.readTree(body.get());
+            JsonNode allQuotes = objectMapper.readTree(body.orElseThrow(() ->
+                    new IllegalArgumentException("Invalid ticker(s)" + tickers)));
 
             for (String ticker : tickers) {
                 ticker = ticker.toUpperCase();
@@ -128,8 +129,6 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
                     throw new IllegalArgumentException("Invalid ticker: " + ticker);
                 }
             }
-        } catch (NoSuchElementException e) {
-            throw new IllegalArgumentException("Invalid ticker(s): " + tickers, e);
         } catch (IOException e) {
             throw new IllegalArgumentException("Unable to parse quote: ", e);
         }

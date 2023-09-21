@@ -4,17 +4,15 @@ import ca.jrvs.apps.trading.model.config.MarketDataConfig;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 
 @Configuration
-public class AppConfig {
-
-    private Logger logger = LoggerFactory.getLogger(AppConfig.class);
+@ComponentScan(basePackages = {"ca.jrvs.apps.trading.dao", "ca.jrvs.apps.trading.service"})
+public class TestConfig {
 
     @Bean
     public MarketDataConfig marketDataConfig() {

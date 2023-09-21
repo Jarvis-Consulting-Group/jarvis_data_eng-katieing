@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.model.domain;
 
 import javax.annotation.Generated;
+import java.lang.reflect.Field;
 
 @Generated("jsonschema2pojo")
 public class IexQuote {
@@ -45,9 +46,9 @@ public class IexQuote {
     private Double iexMarketPercent;
     private Integer iexVolume;
     private Integer avgTotalVolume;
-    private Integer iexBidPrice;
+    private Double iexBidPrice;
     private Integer iexBidSize;
-    private Integer iexAskPrice;
+    private Double iexAskPrice;
     private Integer iexAskSize;
     private Double iexOpen;
     private Long iexOpenTime;
@@ -61,6 +62,7 @@ public class IexQuote {
     private Long lastTradeTime;
     private String currency;
     private Boolean isUSMarketOpen;
+    private IexQuote iexQuote;
 
     public String getSymbol() {
         return symbol;
@@ -382,11 +384,11 @@ public class IexQuote {
         this.avgTotalVolume = avgTotalVolume;
     }
 
-    public Integer getIexBidPrice() {
+    public Double getIexBidPrice() {
         return iexBidPrice;
     }
 
-    public void setIexBidPrice(Integer iexBidPrice) {
+    public void setIexBidPrice(Double iexBidPrice) {
         this.iexBidPrice = iexBidPrice;
     }
 
@@ -398,11 +400,11 @@ public class IexQuote {
         this.iexBidSize = iexBidSize;
     }
 
-    public Integer getIexAskPrice() {
+    public Double getIexAskPrice() {
         return iexAskPrice;
     }
 
-    public void setIexAskPrice(Integer iexAskPrice) {
+    public void setIexAskPrice(Double iexAskPrice) {
         this.iexAskPrice = iexAskPrice;
     }
 
