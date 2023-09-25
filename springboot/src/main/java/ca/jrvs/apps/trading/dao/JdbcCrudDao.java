@@ -15,7 +15,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import java.util.List;
 import java.util.Optional;
 
-abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepository<T, Integer> {
+public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepository<T, Integer> {
 
     public static final Logger logger = LoggerFactory.getLogger(JdbcCrudDao.class);
     abstract public JdbcTemplate getJdbcTemplate();
@@ -89,10 +89,10 @@ abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepository<
     @Override
     public List<T> findAllById(Iterable<Integer> ids) {
 
-        String idList = ids.toString().replace("[", "(").replace("]", ")");
-        String query = "SELECT COUNT(*) FROM " + getTableName() + " WHERE " + getIdColumnName() + " IN ?";
+        String idList = ids.toString().replace('[', '(').replace(']',')');
+        String query = "SELECT * FROM " + getTableName() + " WHERE " + getIdColumnName() + " IN " + idList;
 
-        return getJdbcTemplate().query(query, BeanPropertyRowMapper.newInstance(getEntityClass()), idList);
+        return getJdbcTemplate().query(query, BeanPropertyRowMapper.newInstance(getEntityClass()));
 
     }
 

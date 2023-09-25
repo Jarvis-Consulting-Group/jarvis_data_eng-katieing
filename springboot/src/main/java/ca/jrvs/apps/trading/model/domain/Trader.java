@@ -1,13 +1,17 @@
 package ca.jrvs.apps.trading.model.domain;
 
+import org.apache.tomcat.jni.Local;
+
+import java.time.LocalDate;
+
 public class Trader implements Entity<Integer> {
 
-    int id;
-    String first_name;
-    String last_name;
-    long dob;
-    String country;
-    String email;
+    private int id;
+    private String first_name;
+    private String last_name;
+    private LocalDate dob;
+    private String country;
+    private String email;
 
 
     @Override
@@ -36,11 +40,11 @@ public class Trader implements Entity<Integer> {
         this.last_name = last_name;
     }
 
-    public long getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(long dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
