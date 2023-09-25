@@ -104,6 +104,7 @@ public class QuoteDao implements CrudRepository<Quote, String> {
     public <S extends Quote> Iterable<S> saveAll(Iterable<S> entities) {
         //does batch update/inserts make this more ACID(?) compliant?
         //never mind, I don't know how to do it because add vs update requires a check to the database
+        //but so does save - a call for exists and then one to add/update
         //to see if it exists anyway. maybe after I implement findAllById()?
         entities.forEach(this::save);
         return entities;
