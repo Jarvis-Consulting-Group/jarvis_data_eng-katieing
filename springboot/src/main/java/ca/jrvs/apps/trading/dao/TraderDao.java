@@ -52,6 +52,11 @@ public class TraderDao extends JdbcCrudDao<Trader> {
     }
 
     @Override
+    public String getFkColumnName() {
+        return null;
+    }
+
+    @Override
     Class<Trader> getEntityClass() {
         return Trader.class;
     }

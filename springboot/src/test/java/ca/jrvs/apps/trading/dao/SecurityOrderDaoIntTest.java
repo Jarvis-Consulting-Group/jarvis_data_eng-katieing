@@ -2,8 +2,10 @@ package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.domain.Account;
+import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import ca.jrvs.apps.trading.model.domain.Trader;
+import ca.jrvs.apps.trading.service.QuoteService;
 import org.assertj.core.util.Lists;
 import org.junit.After;
 import org.junit.Before;
@@ -19,8 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {TestConfig.class})
@@ -36,10 +37,16 @@ public class SecurityOrderDaoIntTest {
     @Autowired
     private TraderDao traderDao;
 
+    @Autowired
+    private QuoteService quoteService;
+
     private SecurityOrder savedOrder;
 
     @Before
     public void insertOne() {
+
+        quoteService.saveQuote("aapl");
+
         Trader savedTrader = new Trader();
         savedTrader.setFirst_name("katie");
         savedTrader.setLast_name("ing");
@@ -51,48 +58,69 @@ public class SecurityOrderDaoIntTest {
 
         Account savedAccount = new Account();
         savedAccount.setTrader_id(savedTrader.getId());
-        savedAccount.setAmount(1000.00);
+        savedAccount.setAmount(10000.00);
 
         accountDao.save(savedAccount);
 
         savedOrder = new SecurityOrder();
-        savedOrder.setAccount_id(savedOrder.getAccount_id());
-        savedOrder.
+        savedOrder.setAccount_id(savedAccount.getId());
+        savedOrder.setTicker("AAPL");
+        savedOrder.setSize(3);
+        savedOrder.setStatus("FILLED");
+
+        securityOrderDao.save(savedOrder);
     }
 
     @After
     public void deleteOne() {
+        securityOrderDao.deleteAll();
         accountDao.deleteAll();
         traderDao.deleteAll();
     }
 
     @Test
     public void findAllById() {
-        Optional<Account> account = accountDao.findById(savedAccount.getId());
-        assertTrue(account.isPresent());
+        Optional<SecurityOrder> securityOrder = securityOrderDao.findById(savedOrder.getId());
+        assertTrue(securityOrder.isPresent());
 
-        List<Account> accounts = Lists
-                .newArrayList(accountDao.findAllById(Arrays.asList(savedAccount.getId(), -1)));
-        assertEquals(1, accounts.size());
-        assertEquals(savedAccount.getAmount(), accounts.get(0).getAmount(), 0);
+        List<SecurityOrder> securityOrders = Lists
+                .newArrayList(securityOrderDao.findAllById(Arrays.asList(savedOrder.getId(), -1)));
+        assertEquals(1, securityOrders.size());
+        assertEquals(savedOrder.getSize(), securityOrders.get(0).getSize(), 0);
     }
 
     @Test
     public void addAndFindAll() {
-        Account newAccount = new Account();
-        newAccount.setTrader_id(savedAccount.getTrader_id());
-        newAccount.setAmount(5.00);
+        SecurityOrder newOrder = new SecurityOrder();
+        newOrder.setAccount_id(savedOrder.getAccount_id());
+        newOrder.setTicker("AAPL");
+        newOrder.setSize(4);
+        newOrder.setStatus("CANCELLED");
 
-        accountDao.save(newAccount);
+        securityOrderDao.save(newOrder);
 
-        long count = accountDao.count();
+        long count = securityOrderDao.count();
         assertEquals(count, 2);
 
-        List<Account> accounts = accountDao.findAll();
-        double sum = accounts.stream().mapToDouble(Account::getAmount).sum();
-        assertEquals(sum, 1005, 0);
+        List<SecurityOrder> securityOrders = securityOrderDao.findAll();
+        double sum = securityOrders.stream().mapToDouble(SecurityOrder::getSize).sum();
+        assertEquals(sum, 7, 0);
 
-        accountDao.deleteById(newAccount.getId());
+        accountDao.deleteById(newOrder.getId());
+    }
+
+    @Test
+    public void deleteByIds() {
+        SecurityOrder newOrder = new SecurityOrder();
+        newOrder.setAccount_id(savedOrder.getAccount_id());
+        newOrder.setTicker("AAPL");
+        newOrder.setSize(4);
+        newOrder.setStatus("CANCELLED");
+        securityOrderDao.save(newOrder);
+
+        securityOrderDao.deleteAll(Arrays.asList(savedOrder, newOrder));
+        assertFalse(securityOrderDao.existsById(savedOrder.getId()));
+        assertFalse(securityOrderDao.existsById(newOrder.getId()));
     }
 
 

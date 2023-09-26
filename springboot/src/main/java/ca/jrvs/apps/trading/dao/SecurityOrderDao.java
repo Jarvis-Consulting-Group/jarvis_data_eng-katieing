@@ -9,15 +9,17 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Repository
-public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder {
+public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder> {
 
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityOrderDao.class);
 
     private final String TABLE_NAME = "security_order";
     private final String ID_COLUMN = "id";
+    private final String FK_COLUMN = "account_id";
 
     private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleInsert;
@@ -50,6 +52,11 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder {
     }
 
     @Override
+    public String getFkColumnName() {
+        return FK_COLUMN;
+    }
+
+    @Override
     Class<SecurityOrder> getEntityClass() {
         return SecurityOrder.class;
     }
@@ -69,9 +76,9 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder {
         throw new UnsupportedOperationException("Not implemented");
     }
 
-    @Override
-    public void deleteAll(Iterable<? extends SecurityOrder> entities) {
-        throw new UnsupportedOperationException("Not implemented");
+    public void deleteByAccountId(Integer id) {
+        List<SecurityOrder> orders = findAllByFk(id);
+        deleteAll(orders);
     }
 
 }

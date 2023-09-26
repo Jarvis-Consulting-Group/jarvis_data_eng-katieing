@@ -4,10 +4,10 @@ public class SecurityOrder implements Entity<Integer>{
 
     private Integer id;
     private int account_id;
-    private String status;
-    private String ticker;
-    private int size;
-    private Double price;
+    private String status; //filled, cancelled
+    private String ticker; //must exist in daily list
+    private int size; //int number to purchase, comes from ask size in daily list (i.e. <= ask size)
+    private Double price; //ask price in daily list (= ask price)
     private String notes;
 
     public Integer getId() {

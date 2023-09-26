@@ -86,4 +86,17 @@ public class AccountDaoIntTest {
         accountDao.deleteById(newAccount.getId());
     }
 
+    @Test
+    public void addAndDelete() {
+        Account newAccount = new Account();
+        newAccount.setTrader_id(savedAccount.getTrader_id());
+        newAccount.setAmount(5.00);
+
+        accountDao.save(newAccount);
+
+        accountDao.deleteByTraderId(savedAccount.getTrader_id());
+        List<Account> accounts = accountDao.findAllByFk(savedAccount.getTrader_id());
+        assertTrue(accounts.isEmpty());
+    }
+
 }

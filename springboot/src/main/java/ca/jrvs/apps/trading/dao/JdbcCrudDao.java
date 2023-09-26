@@ -22,6 +22,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
     abstract public SimpleJdbcInsert getSimpleJdbcInsert();
     abstract public String getTableName();
     abstract public String getIdColumnName();
+    abstract public String getFkColumnName();
     abstract Class<T> getEntityClass();
 
     /**
@@ -70,12 +71,19 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
         return entity;
     }
 
+    public List<T> findAllByFk(Integer id) {
+        if (getFkColumnName() == null) {
+            throw new UnsupportedOperationException("No foreign key for this table");
+        }
+        String query = "SELECT * FROM " + getTableName() + " WHERE " + getFkColumnName() + " = ?";
+        return getJdbcTemplate().query(query, BeanPropertyRowMapper.newInstance(getEntityClass()), id);
+    }
+
     @Override
     public boolean existsById(Integer id) {
-
         String query = "SELECT COUNT(*) FROM " + getTableName() + " WHERE " + getIdColumnName() + " = ?";
         int row = getJdbcTemplate().queryForObject(query, Integer.class, id);
-        return row == 1;
+        return row >= 1;
     }
 
     @Override
@@ -115,5 +123,21 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
 
         String query = "DELETE FROM " + getTableName();
         getJdbcTemplate().update(query);
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends T> entities) {
+        StringBuilder sb = new StringBuilder("(");
+        boolean entitiesIsEmpty = true;
+        for (T entity : entities) {
+            sb.append(entity.getId()).append(", ");
+            entitiesIsEmpty = false;
+        }
+        if (!entitiesIsEmpty) {
+            sb.delete(sb.length()-2, sb.length()).append(')');
+            String query = "DELETE FROM " + getTableName() + " WHERE " + getIdColumnName() + " IN " + sb.toString();
+
+            getJdbcTemplate().update(query);
+        }
     }
 }

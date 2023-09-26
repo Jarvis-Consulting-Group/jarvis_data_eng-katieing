@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Account;
+import ca.jrvs.apps.trading.model.domain.Quote;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class AccountDao extends JdbcCrudDao<Account>{
@@ -17,6 +20,7 @@ public class AccountDao extends JdbcCrudDao<Account>{
 
     private final String TABLE_NAME = "account";
     private final String ID_COLUMN = "id";
+    private final String FK_COLUMN = "trader_id";
 
     private JdbcTemplate jdbcTemplate;
     private SimpleJdbcInsert simpleInsert;
@@ -49,13 +53,24 @@ public class AccountDao extends JdbcCrudDao<Account>{
     }
 
     @Override
+    public String getFkColumnName() {
+        return FK_COLUMN;
+    }
+
+    @Override
     Class<Account> getEntityClass() {
         return Account.class;
     }
 
+    private Object[] makeUpdateValues(Account account) {
+        return new Object[]{account.getTrader_id(), account.getAmount(), account.getId()};
+    }
+
     @Override
-    public int updateOne(Account entity) {
-        throw new UnsupportedOperationException("Not implemented");
+    public int updateOne(Account account) {
+        String update_sql = "UPDATE " + TABLE_NAME + " SET trader_id=?, " +
+                "amount=? WHERE " + ID_COLUMN + "=?";
+        return jdbcTemplate.update(update_sql, makeUpdateValues(account));
     }
 
     @Override
@@ -68,8 +83,8 @@ public class AccountDao extends JdbcCrudDao<Account>{
         throw new UnsupportedOperationException("Not implemented");
     }
 
-    @Override
-    public void deleteAll(Iterable<? extends Account> entities) {
-        throw new UnsupportedOperationException("Not implemented");
+    public void deleteByTraderId(Integer id) {
+        List<Account> accounts = findAllByFk(id);
+        deleteAll(accounts);
     }
 }

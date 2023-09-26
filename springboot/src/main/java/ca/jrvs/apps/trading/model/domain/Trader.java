@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Trader implements Entity<Integer> {
 
-    private int id;
+    private Integer id;
     private String first_name;
     private String last_name;
     private LocalDate dob;
