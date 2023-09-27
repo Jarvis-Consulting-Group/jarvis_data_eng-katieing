@@ -1,4 +1,7 @@
-package ca.jrvs.apps.trading.model.domain;
+package ca.jrvs.apps.trading.model.view;
+
+import ca.jrvs.apps.trading.model.domain.Account;
+import ca.jrvs.apps.trading.model.domain.Trader;
 
 import java.util.ArrayList;
 import java.util.List;

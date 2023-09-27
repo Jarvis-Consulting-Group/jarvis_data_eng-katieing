@@ -3,7 +3,7 @@ package ca.jrvs.apps.trading.controller;
 import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.ResponseExceptionUtil;
 import ca.jrvs.apps.trading.model.domain.Trader;
-import ca.jrvs.apps.trading.model.domain.TraderAccountView;
+import ca.jrvs.apps.trading.model.view.TraderAccountView;
 import ca.jrvs.apps.trading.service.TraderAccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

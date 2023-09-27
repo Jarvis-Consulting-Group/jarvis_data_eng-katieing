@@ -99,4 +99,13 @@ public class AccountDaoIntTest {
         assertTrue(accounts.isEmpty());
     }
 
+    @Test
+    public void findNonExistent() {
+        Optional<Account> account = accountDao.findById(30);
+        assertFalse(account.isPresent());
+
+        List<Account> accountsList = accountDao.findAllByFk(30);
+        assertTrue(accountsList.isEmpty());
+    }
+
 }
