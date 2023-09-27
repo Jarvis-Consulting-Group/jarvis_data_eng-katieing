@@ -1,4 +1,4 @@
-package ca.jrvs.apps.trading.controller;
+package ca.jrvs.apps.trading.model.domain;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

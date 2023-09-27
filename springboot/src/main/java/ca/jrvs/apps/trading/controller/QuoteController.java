@@ -2,6 +2,7 @@ package ca.jrvs.apps.trading.controller;
 
 import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
+import ca.jrvs.apps.trading.model.domain.ResponseExceptionUtil;
 import ca.jrvs.apps.trading.service.QuoteService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.List;
 
 @Api(value = "quote", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

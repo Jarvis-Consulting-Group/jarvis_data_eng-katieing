@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.controller;
 
 import ca.jrvs.apps.trading.model.domain.Account;
+import ca.jrvs.apps.trading.model.domain.ResponseExceptionUtil;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import ca.jrvs.apps.trading.model.domain.TraderAccountView;
 import ca.jrvs.apps.trading.service.TraderAccountService;
@@ -15,7 +16,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Api(value = "Trader", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
