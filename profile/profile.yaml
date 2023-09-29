@@ -101,11 +101,11 @@ professional_experience:
     company: "Jarvis"
     duration: "2023-present"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: "Collaborated with a team of BSAs and developers using Agile methodology; 
-    Created a monitoring agent with SQL to be used for resource planning and allocation; 
-    Prepared a BRD for the Linux Cluster Monitoring Agent project; 
-    Conducted elicitation requirements meetings in order to create a SRD for a trading app; 
-    Provided regular documentation and verbal updates on all projects"
+    description: "Developed Java applications with core Java fundamentals, JDBC, Spring Boot and Maven; 
+    Utilized bash scripting to create a Linux monitoring agent, and strong written and oral communication skills 
+    to produce business and systems requirements documents; 
+    Provided thorough documentation and verbal updates on all projects; 
+    Collaborated with a development team using Agile methodology; "
   - title: "Research Assistant"
     company: "University of Toronto"
     duration: "2020-2021"

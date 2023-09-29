@@ -33,7 +33,7 @@ Project source code: [https://github.com/Jarvis-Consulting-Group/jarvis_data_eng
 
 ## Professional Experiences
 
-**Tehcnical Consultant, Jarvis (2023-present)**: Collaborated with a team of BSAs and developers using Agile methodology; Created a monitoring agent with SQL to be used for resource planning and allocation; Prepared a BRD for the Linux Cluster Monitoring Agent project; Conducted elicitation requirements meetings in order to create a SRD for a trading app; Provided regular documentation and verbal updates on all projects
+**Tehcnical Consultant, Jarvis (2023-present)**: Developed Java applications with core Java fundamentals, JDBC, Spring Boot and Maven; Utilized bash scripting to create a Linux monitoring agent, and strong written and oral communication skills to produce business and systems requirements documents; Provided thorough documentation and verbal updates on all projects; Collaborated with a development team using Agile methodology; 
 
 **Research Assistant, University of Toronto (2020-2021)**: Gathered and analyzed qualitative and quantitative data from three projects in the field of post-secondary education and teaching; Investigated retention of knowledge and communication development of past students; Served as team lead during the research process (data analysis in Excel/Google Sheets and R); Authored an ethics application, proposal, surveys, and written report; Presented study results at the Canadian Undergraduate Mathematics Conference in 2019 and the Fields Institute MathEd Forum in 2020.
 
