@@ -1,17 +1,12 @@
 package ca.jrvs.apps.trading.model.view;
 
-import ca.jrvs.apps.trading.model.domain.Account;
-import ca.jrvs.apps.trading.model.domain.Position;
-import ca.jrvs.apps.trading.model.domain.Quote;
-
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class PortfolioView {
 
     private Integer traderId;
 
-    private HashMap<String, Object[]> portfolio;
-
+    private HashSet<AccountView> portfolio;
 
     public Integer getTraderId() {
         return traderId;
@@ -21,23 +16,16 @@ public class PortfolioView {
         this.traderId = traderId;
     }
 
-    public HashMap<String, Object[]> getPortfolio() {
+    public HashSet<AccountView> getPortfolio() {
         return portfolio;
     }
 
-    public void setPortfolio(HashMap<String, Object[]> portfolio) {
+    public void setPortfolio(HashSet<AccountView> portfolio) {
         this.portfolio = portfolio;
     }
 
-    public void addAccount(Account account) {
-        if (portfolio == null) {
-            portfolio = new HashMap<>();
-        }
-        portfolio.put(account.toString(), new Object[2]);
+    public void addAccount(AccountView accountView) {
+        this.portfolio.add(accountView);
     }
 
-    public void addPosition(Account account, Position position, Quote quote) {
-        portfolio.get(account.toString())[0] = position;
-        portfolio.get(account.toString())[1] = quote;
-    }
 }

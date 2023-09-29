@@ -1,8 +1,8 @@
 package ca.jrvs.apps.trading.service;
 
 import ca.jrvs.apps.trading.TestConfig;
-import ca.jrvs.apps.trading.dao.AccountDao;
-import ca.jrvs.apps.trading.dao.TraderDao;
+import ca.jrvs.apps.trading.dao.AccountJpaDao;
+import ca.jrvs.apps.trading.dao.TraderJpaDao;
 import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import ca.jrvs.apps.trading.model.view.TraderAccountView;
@@ -28,9 +28,9 @@ public class TraderAccountServiceIntTest {
     @Autowired
     private TraderAccountService traderAccountService;
     @Autowired
-    private TraderDao traderDao;
+    private TraderJpaDao traderDao;
     @Autowired
-    private AccountDao accountDao;
+    private AccountJpaDao accountDao;
 
     @Before
     public void setupTrader() {
@@ -95,12 +95,12 @@ public class TraderAccountServiceIntTest {
         }
 
         Account secondAccount = new Account();
-        secondAccount.setTrader_id(savedView.getTraderId());
+        secondAccount.setTraderId(savedView.getTraderId());
         secondAccount.setAmount(543.21);
         accountDao.save(secondAccount);
 
         traderAccountService.withdraw(savedView.getTraderId(), 400.01);
-        List<Account> accounts = accountDao.findAllByFk(savedView.getTraderId());
+        List<Account> accounts = accountDao.getAccountByTraderId(savedView.getTraderId());
         double sum = accounts.stream().mapToDouble(Account::getAmount).sum();
         assertEquals(sum, 243.57,0.001);
 
@@ -117,7 +117,7 @@ public class TraderAccountServiceIntTest {
     @Test
     public void deleteTrader() {
         traderAccountService.deleteTraderById(savedView.getTraderId());
-        assertTrue(accountDao.findAllByFk(savedView.getTraderId()).isEmpty());
+        assertTrue(accountDao.getAccountByTraderId(savedView.getTraderId()).isEmpty());
         assertFalse(traderDao.existsById(savedView.getTraderId()));
 
         try {

@@ -2,10 +2,16 @@ package ca.jrvs.apps.trading.model.domain;
 
 import org.apache.tomcat.jni.Local;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
+@javax.persistence.Entity
 public class Trader implements Entity<Integer> {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String first_name;
     private String last_name;

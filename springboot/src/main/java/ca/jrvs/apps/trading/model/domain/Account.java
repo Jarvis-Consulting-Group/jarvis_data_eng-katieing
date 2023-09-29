@@ -1,9 +1,18 @@
 package ca.jrvs.apps.trading.model.domain;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@javax.persistence.Entity
 public class Account implements Entity<Integer>{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private int trader_id;
+    @Column(name = "trader_id")
+    private int traderId;
     private double amount;
 
     public Integer getId() {
@@ -14,12 +23,12 @@ public class Account implements Entity<Integer>{
         this.id = id;
     }
 
-    public int getTrader_id() {
-        return trader_id;
+    public int getTraderId() {
+        return traderId;
     }
 
-    public void setTrader_id(int trader_id) {
-        this.trader_id = trader_id;
+    public void setTraderId(int traderId) {
+        this.traderId = traderId;
     }
 
     public double getAmount() {

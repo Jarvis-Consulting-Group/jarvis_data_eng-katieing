@@ -59,7 +59,7 @@ public class PositionDaoIntTest {
         traderDao.save(savedTrader);
 
         Account savedAccount = new Account();
-        savedAccount.setTrader_id(savedTrader.getId());
+        savedAccount.setTraderId(savedTrader.getId());
         savedAccount.setAmount(10000.00);
 
         accountDao.save(savedAccount);

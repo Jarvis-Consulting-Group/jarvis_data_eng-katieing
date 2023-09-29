@@ -1,9 +1,9 @@
 package ca.jrvs.apps.trading.service;
 
-import ca.jrvs.apps.trading.dao.AccountDao;
 import ca.jrvs.apps.trading.dao.PositionDao;
 import ca.jrvs.apps.trading.dao.SecurityOrderDao;
-import ca.jrvs.apps.trading.dao.TraderDao;
+import ca.jrvs.apps.trading.dao.AccountJpaDao;
+import ca.jrvs.apps.trading.dao.TraderJpaDao;
 import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Position;
 import ca.jrvs.apps.trading.model.domain.Trader;
@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 @Service
 public class TraderAccountService {
 
-    private TraderDao traderDao;
-    private AccountDao accountDao;
+    private TraderJpaDao traderDao;
+    private AccountJpaDao accountDao;
     private PositionDao positionDao;
     private SecurityOrderDao securityOrderDao;
 
     @Autowired
-    public TraderAccountService(TraderDao traderDao, AccountDao accountDao, PositionDao positionDao,
+    public TraderAccountService(TraderJpaDao traderDao, AccountJpaDao accountDao, PositionDao positionDao,
                                 SecurityOrderDao securityOrderDao) {
         this.traderDao = traderDao;
         this.accountDao = accountDao;
@@ -54,7 +54,7 @@ public class TraderAccountService {
         //create a trader and account
         traderDao.save(trader);
         Account traderAccount = new Account();
-        traderAccount.setTrader_id(trader.getId());
+        traderAccount.setTraderId(trader.getId());
         traderAccount.setAmount(0d);
         accountDao.save(traderAccount);
 
@@ -81,7 +81,7 @@ public class TraderAccountService {
         } else if (!traderDao.existsById(traderId)) {
             throw new IllegalArgumentException("Trader not found in the database");
         } else {
-            List<Account> traderAccounts = accountDao.findAllByFk(traderId);
+            List<Account> traderAccounts = accountDao.getAccountByTraderId(traderId);
             if (traderAccounts.stream().mapToDouble(Account::getAmount).sum() != 0) {
                 throw new IllegalArgumentException("Trader account(s) has remaining positive balance. " +
                         "Empty account(s) before deleting trader");
@@ -95,7 +95,7 @@ public class TraderAccountService {
                     for (Account account : traderAccounts) {
                         securityOrderDao.deleteByAccountId(account.getId());
                     }
-                    accountDao.deleteByTraderId(traderId);
+                    accountDao.deleteAll(traderAccounts);
                     traderDao.deleteById(traderId);
                 }
             }
@@ -119,7 +119,7 @@ public class TraderAccountService {
         } else if (fund <= 0) {
             throw new IllegalArgumentException("Deposit amount must be greater than 0");
         }
-        Account account = accountDao.findAllByFk(traderId).get(0);
+        Account account = accountDao.getAccountByTraderId(traderId).get(0);
         account.setAmount(account.getAmount() + fund);
         return accountDao.save(account);
     }
@@ -137,7 +137,7 @@ public class TraderAccountService {
             throw new IllegalArgumentException("Deposit amount must be greater than 0");
         }
 
-        List<Account> accounts = accountDao.findAllByFk(traderId);
+        List<Account> accounts = accountDao.getAccountByTraderId(traderId);
         int i = 0;
         while (i < accounts.size() && accounts.get(i).getAmount() < fund) {
             i++;

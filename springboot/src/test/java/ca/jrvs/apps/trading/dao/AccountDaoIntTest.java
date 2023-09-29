@@ -45,7 +45,7 @@ public class AccountDaoIntTest {
         traderDao.save(savedTrader);
 
         savedAccount = new Account();
-        savedAccount.setTrader_id(savedTrader.getId());
+        savedAccount.setTraderId(savedTrader.getId());
         savedAccount.setAmount(1000.00);
 
         accountDao.save(savedAccount);
@@ -71,7 +71,7 @@ public class AccountDaoIntTest {
     @Test
     public void addAndFindAll() {
         Account newAccount = new Account();
-        newAccount.setTrader_id(savedAccount.getTrader_id());
+        newAccount.setTraderId(savedAccount.getTraderId());
         newAccount.setAmount(5.00);
 
         accountDao.save(newAccount);
@@ -89,13 +89,13 @@ public class AccountDaoIntTest {
     @Test
     public void addAndDelete() {
         Account newAccount = new Account();
-        newAccount.setTrader_id(savedAccount.getTrader_id());
+        newAccount.setTraderId(savedAccount.getTraderId());
         newAccount.setAmount(5.00);
 
         accountDao.save(newAccount);
 
-        accountDao.deleteByTraderId(savedAccount.getTrader_id());
-        List<Account> accounts = accountDao.findAllByFk(savedAccount.getTrader_id());
+        accountDao.deleteByTraderId(savedAccount.getTraderId());
+        List<Account> accounts = accountDao.findAllByFk(savedAccount.getTraderId());
         assertTrue(accounts.isEmpty());
     }
 

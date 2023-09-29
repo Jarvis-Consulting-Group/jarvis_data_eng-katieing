@@ -2,7 +2,6 @@ package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.domain.Account;
-import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import ca.jrvs.apps.trading.service.QuoteService;
@@ -57,7 +56,7 @@ public class SecurityOrderDaoIntTest {
         traderDao.save(savedTrader);
 
         Account savedAccount = new Account();
-        savedAccount.setTrader_id(savedTrader.getId());
+        savedAccount.setTraderId(savedTrader.getId());
         savedAccount.setAmount(10000.00);
 
         accountDao.save(savedAccount);

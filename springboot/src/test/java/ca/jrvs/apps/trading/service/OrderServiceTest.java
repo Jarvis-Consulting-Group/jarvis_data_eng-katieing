@@ -35,9 +35,6 @@ public class OrderServiceTest {
     @Captor
     ArgumentCaptor<SecurityOrder> captorSecurityOrder;
 
-    @Captor
-    ArgumentCaptor<Account> captorAccount;
-
     //mock all dependencies
     @Mock
     private AccountDao accountDao;
