@@ -1,0 +1,155 @@
+# Preferred name (Characters only)
+name: "Katie Ing"
+# Your GitHub repo root URL
+github_repo_root_url: https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-katieing
+
+# Introduce yourself, your academic and professional background.
+# What excites you about the software industry and your passion. At least 80 words
+summary: I am an enthusiastic and ambitious newcomer to the world of software development, holding a recent master's degree in pure mathematics from the University of Toronto. My passion lies in problem-solving, and I thrive on the structured precision found in both computer science and math. I embrace the learning process wholeheartedly, aiming to improve and innovate in every project I undertake.
+
+# Group your skills by level.
+# Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
+skills:
+  # At least 5 skills
+  proficient:
+    - Java
+    - Linux/Bash
+    - RDBMS/SQL
+    - Agile/Scrum
+    - Git
+  # At least 5 skills
+  competent:
+    - Spring/Spring Boot
+    - JDBC
+    - REST APIs
+    - IntelliJ
+    - Python
+  # At least 5 skills
+  familiar:
+    - Docker
+    - Maven
+    - Google Cloud Computing
+    - R
+    - some fifth skill
+
+# List of Jarvis projects
+jarvis_projects:
+  - name: "Linux Cluster Resource Monitoring App"
+    git_url: "/linux_sql"
+    # The project description allows hiring managers to understand your project and technologies
+    # you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "Developed a monitoring agent that collects and records hardware and memory usage data, 
+    to provide valuable insights to business owners and team leads for future planning. 
+    Implemented with Bash scripting, the data for this app is stored and queried on a PostgreSQL database for scalable management. 
+    Tested this app manually on a single node, and automated the scripts using cron."
+  - name: "SQL Project"
+    git_url: "/sql"
+    description: "Established a comprehensive database for a newly established country club using PostgreSQL. 
+    Demonstrated usage by executing sample queries and verifying accuracy with test data."
+  - name: "Core Java Apps"
+    git_url: "/core_java"
+    description:
+      - "JDBC App: Worked on a JDBC application that interfaces with a PostgreSQL database, 
+      enabling CRUD operations for a database within a retail context. 
+      Leveraged Java to connect to a sales database, offering functionalities like customer data manipulation and retrieval, 
+      as well as order and order item data retrieval. Verified expected behaviour through manual testing of a sample database. 
+      Employed Maven for efficient build management."
+      - "Grep App: Designed an application to recursively search a directory for lines of text that match a 
+      Regex search pattern and write the matching lines to a file. 
+      Developed the app using core Java, and harnessed Regex and Stream APIs for efficient processing of large directories and files. 
+      Manually tested the app with thorough example use cases and expected user errors. 
+      Managed dependencies and build process through Maven, and containerized with Docker. After deployment, 
+      added a feature to handle read-access exceptions and increase reporting. "
+  - name: "Springboot App"
+    git_url: "/springboot"
+    description: "Developed a retail stock trading Spring Boot application for individual/recreational investors. 
+    Utilized Spring DAO to manage and persist trader data in a PostgreSQL database and REST web APIs to provide updated stock quotes. 
+    Conducted integration tests, unit tests with JUnit and Mockito and manual testing of endpoints with Swagger UI. 
+    Containerized the app with docker. Ongoing improvements include re-implementing all DAOs with JPA/Hibernate."
+#  - name: "Python Data Analytics"
+#    git_url: "/python_data_anlytics"
+#    description: ""
+#  - name: "Hadoop"
+#    git_url: "/hadoop"
+#    description: ""
+#  - name: "Spark"
+#    git_url: "/spark"
+#    description: ""
+#  - name: "Cloud/DevOps"
+#    git_url: "/cloud_devops"
+#    description: ""
+
+# List of personal or academic projects
+# Feel free to add more projects
+highlighted_projects:
+    #project name
+  - name: "Survey on Classroom Experiences for Underrepresented Groups in Math"
+    #URL is optional
+    git_url: "n/a"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: Led a project investigating the classroom culture and its impact on underrepresented students in math and calculus classes. Designed, pilot tested, and distributed a comprehensive survey to approximately 4000 students. Through qualitative and quantitative data analysis, the results highlighted the influence of classroom culture on student engagement, confidence, and future career choices in STEM. Presented a detailed report to the Diversity and Equity committee, enabling informed decision-making on necessary changes and additional support for affected students.
+
+#List of professional experience
+#The job description allows hiring managers to understand your job and the technologies you used
+  #(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
+#The description must be more than 25 words. If your experience is not software related,
+  #please focus on soft skills and achievements (e.g. team collaboration, problem-solving, improvements, communication).
+professional_experience:
+  #Write your Jarvis role as a professional experience rather than training.
+  - title: "Tehcnical Consultant"
+    company: "Jarvis"
+    duration: "2023-present"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: "Developed Java applications with core Java fundamentals, JDBC, Spring Boot and Maven; 
+    Utilized bash scripting to create a Linux monitoring agent, and strong written and oral communication skills 
+    to produce business and systems requirements documents; 
+    Provided thorough documentation and verbal updates on all projects; 
+    Collaborated with a development team using Agile methodology; "
+  - title: "Research Assistant"
+    company: "University of Toronto"
+    duration: "2020-2021"
+    description: "Gathered and analyzed qualitative and quantitative data from three projects in the field of post-secondary education and teaching; 
+    Investigated retention of knowledge and communication development of past students; 
+    Served as team lead during the research process (data analysis in Excel/Google Sheets and R); 
+    Authored an ethics application, proposal, surveys, and written report; 
+    Presented study results at the Canadian Undergraduate Mathematics Conference in 2019 and the Fields Institute MathEd Forum in 2020."
+  - title: "Teaching Assistant"
+    company: "University of Toronto"
+    duration: "2019-2022"
+    description: "Facilitated tutorials for students and supported professors with lectures; 
+    Independently designed a weekly series of pre-lecture videos, readings and quizzes for a course with 3000 students."
+
+#List of edcuation
+education: 
+  - school_name: "University of Toronto"
+    duration: "2017-2021"
+    degree: "Bachelor of Science"
+    department: "Department of Mathematics"
+    # optional
+    awards_achievements: 
+      - "Dean's List Scholar, 2018"
+  - school_name: "University of Toronto"
+    duration: "2021-2022"
+    degree: "Master of Science"
+    department: "Department of Mathematics"
+    awards_achievements:
+      - "Department of Mathematics Graduate Award, 2021"
+
+#Optional section
+others:
+    #category
+#  - title: "Certificates"
+#    #list of items
+#    bullets:
+#      - "Udacity Machine Learning (2019)"
+#  - title: "Awards"
+#    bullets:
+#      - "Winner"
+  - title: "Activities/Hobbies"
+    bullets:
+      - "Adventurous traveller: visited 13 countries with a preference for solo trips"
+      - "Passionate about teaching: worked as a swim instructor and supervisor from 2012-2019 and teaching 
+      assistant from 2019-2022"
+      - "Recreational runner: participated in half-marathon events in Toronto and Denver and hoping to complete my 
+      first full marathon in 2024"
