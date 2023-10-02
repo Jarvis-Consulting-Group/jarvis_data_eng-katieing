@@ -135,7 +135,7 @@ public abstract class JdbcCrudDao<T extends Entity<Integer>> implements CrudRepo
         }
         if (!entitiesIsEmpty) {
             sb.delete(sb.length()-2, sb.length()).append(')');
-            String query = "DELETE FROM " + getTableName() + " WHERE " + getIdColumnName() + " IN " + sb.toString();
+            String query = "DELETE FROM " + getTableName() + " WHERE " + getIdColumnName() + " IN " + sb;
 
             getJdbcTemplate().update(query);
         }

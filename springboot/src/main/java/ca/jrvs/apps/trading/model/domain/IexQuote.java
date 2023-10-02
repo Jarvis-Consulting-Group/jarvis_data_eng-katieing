@@ -1,7 +1,6 @@
 package ca.jrvs.apps.trading.model.domain;
 
 import javax.annotation.Generated;
-import java.lang.reflect.Field;
 
 @Generated("jsonschema2pojo")
 public class IexQuote {

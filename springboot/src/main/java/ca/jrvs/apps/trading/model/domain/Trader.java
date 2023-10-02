@@ -1,7 +1,5 @@
 package ca.jrvs.apps.trading.model.domain;
 
-import org.apache.tomcat.jni.Local;
-
 import java.time.LocalDate;
 
 public class Trader implements Entity<Integer> {
