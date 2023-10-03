@@ -1,0 +1,110 @@
+# Preferred name (Characters only)
+name: "Katie Ing"
+# Your GitHub repo root URL
+github_repo_root_url: https://github.com/jarviscanada/jarvis_data_eng-katieing
+
+# Introduce yourself (80-120 words)
+# Suggestions: you should 
+# 1) describe your academic and work experience (please focus on transferable/job related tech and soft skills only)
+# 2) explain your passion for the role you are looking for (e.g. developer, BSA, QA, tech support, etc.)
+# 3) mention what kind of role you are looking for
+# 4) briefly talk about your qualifications (soft and tech) to justify why the hiring manager should hire your 
+summary: I am an aspiring Business Systems Analyst with a recent master's degree in mathematics from the University of Toronto. I am drawn to a BSA role because it allows me to merge my exceptional problem-solving skills, developed through my academic background, with my ability to collaborate effectively within teams. With teaching assistant positions, I have developed exceptional communication skills, while research assistant roles have provided experience in data analysis, data gathering and reporting. Currently working as a technical consultant at Jarvis, I have gained proficiency in PostgreSQL. Additionally, I have gained strong relationship development skills through a variety of academic and seasonal positions.
+
+skills:
+  # Please include 
+  #     1) soft skills (e.g. elicitation, communicaiton, collaberation, interpersonal, etc )
+  #     2) business tools (such as Excel, Viso, etc.)
+  Business Skills:
+    - Communication
+    - Collaboration
+    - Leadership
+    - Creative problem-solving
+    - Agile/Scrum
+  # Please add more data related skills, such as Python, Tableau, R, Matlab, AI, ML, Statistics, etc.
+  # You can also add some programming skills, such as programming languages, GIT, Linux, Cloud Platform, tools, etc.
+  Technical Skills:
+    - RDBMS/SQL
+    - Data Modeling/Mapping
+    - Data Analytics
+    - Python
+    - MS Excel
+
+# List of Jarvis projects
+# Please describe your resume from a BSA perspective (e.g. requirement elicitation, scope, stakeholder, coordination, diagrams)
+jarvis_projects:
+  - name: "Linux Cluster Resource Monitoring App"
+    git_url: "/linux_sql"
+    # Focus on BSA work instead of development work
+    # Include the following keywords: BRD, SRD, Elicitation, stakeholder, reqruiement, analysis, RDBMS, SQL, data modeling, SLA
+    description: Developed a monitoring agent that collects and records hardware and memory usage data, to provide valuable insights to business owners and team leads for future planning. This tool empowers stakeholders to make informed decisions regarding resource allocation and optimization. The data is stored and queried on a PostgreSQL database for scalable management. This project is meticulously documented to ensure straightforward setup for current and future clients.
+  - name: "SQL Project"
+    git_url: "/sql"
+    description: Established a comprehensive database for a newly established country club using PostgreSQL. The goal of the database is to be utilized by country club managers to analyze facility usage and demand. Demonstrated usage by executing sample queries and verifying accuracy with test data.
+  - name: "BSA Crash Course"
+    git_url: "/"
+    description: Authored a comprehensive Business Requirements Document (BRD) for a Linux Cluster Monitoring Agent project, thoroughly detailing the project scope, business requirements, timeline, and cost-benefit analysis. Orchestrated an elicitation meeting with stakeholders and crafted a concise System Requirements Document (SRD) for a Retail Stock Trading Application. Effectively translated business needs into technical specifications by creating architecture and ER diagrams, and communicating complete use cases and data requirements.
+  - name: "JDBC App"
+    git_url: "/core_java/jdbc"
+    description: Developed a JDBC application that interfaces with a PostgreSQL database, enabling CRUD operations for a database within a retail context. Leveraged Java to connect to a sales database, offering functionalities like customer data manipulation and retrieval, as well as order and order item data retrieval. Employed Maven for efficient build management.
+
+  #- name: "Hadoop"
+  #  git_url: "/hadoop"
+  #  description: ""
+
+# List of personal or academic projects
+# Please focus on transferable skills, such as soft skills and data related skills
+highlighted_projects:
+    #project name
+  - name: Survey on Classroom Experiences for Underrepresented Groups in Math
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    description: Led a project investigating the classroom culture and its impact on underrepresented students in math and calculus classes. Designed, pilot tested, and distributed a comprehensive survey to approximately 4000 students. Through qualitative and quantitative data analysis, the results highlighted the influence of classroom culture on student engagement, confidence, and future career choices in STEM. Presented a detailed report to the Diversity and Equity committee, enabling informed decision-making on necessary changes and additional support for affected students.
+  #- name: "Machine Learning"
+  #  git_url:
+  #  description: Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.
+
+# List of professional experience
+# Please focus on transferable skills, such as soft skills and data related skills
+professional_experience:
+  #Write your Jarvis role as a professional experience rather than training.
+  - title: "Technical Consultant"
+    company: "Jarvis"
+    duration: "2023-present"
+    # The project description must start with an action verb (https://bit.ly/3guO98u)
+    # Avoid the following terms: training, learning, etc. Instead, you should focus on the work, such as worked on XYY; Wrote ABC document; Analyzed QWE project;
+    description: Collaborated with a team of BSAs and developers using Agile methodology; Created a monitoring agent with SQL to be used for resource planning and allocation; Prepared a BRD for the Linux Cluster Monitoring Agent project; Conducted elicitation requirements meetings in order to create a SRD for a trading app; Provided regular documentation and verbal updates on all projects
+
+  - title: "Research Assistant"
+    company: "University of Toronto"
+    duration: "2020-2021"
+    description: Gathered and analyzed qualitative and quantitative data from three projects in the field of post-secondary education and teaching; Investigated retention of knowledge and communication development of past students; Served as team lead during the research process (data analysis in Excel and Google Sheets); Authored an ethics application, proposal, surveys, and written report; Presented study results at the Canadian Undergraduate Mathematics Conference in 2019 and the Fields Institute MathEd Forum in 2020.
+
+  - title: "Teaching Assistant"
+    company: "University of Toronto"
+    duration: "2019-2022"
+    description: Facilitated tutorials for students and supported professors with lectures; Independently designed a weekly series of pre-lecture videos, readings and quizzes for a course with 3000 students.
+
+
+  #List of edcuation
+education: 
+  - school_name: "University of Toronto"
+    duration: "2017-2021"
+    degree: "Bachelor of Science"
+    department: "Mathematics"
+    # optional
+    awards_achievements: 
+      - "Dean's List Scholar, 2018"
+  - school_name: "University of Toronto"
+    duration: "2021-2022"
+    degree: "Master of Science"
+    department: "Mathematics"
+    awards_achievements:
+      - "Department of Mathematics Graduate Award, 2021"
+
+#Optional section
+others:
+  #category
+  - title: "Activities/Hobbies"
+    bullets:
+      - "Running; completed half-marathon races in Toronto and Denver and currently training for a marathon"
+      - "Solo traveler; visited 10 countries on various solo trips"
